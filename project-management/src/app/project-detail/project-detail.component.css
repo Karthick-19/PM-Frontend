@@ -1,0 +1,48 @@
+/* src/app/components/project-details/project-details.component.css
+.project-details {
+    padding: 20px;
+  }
+  
+  .kanban-board {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .kanban-column {
+    flex: 1;
+    margin: 0 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .kanban-task {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+   */
+   /* src/app/components/project-details/project-details.component.css */
+.project-details {
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+  }
+  
+  h3 {
+    font-size: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  

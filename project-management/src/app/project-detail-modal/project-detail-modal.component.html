@@ -1,0 +1,10 @@
+<p>project-detail-modal works!</p>
+<h1 mat-dialog-title>Project Details</h1>
+<div mat-dialog-content>
+  <p><strong>Name:</strong> {{ project.name }}</p>
+  <p><strong>Description:</strong> {{ project.description }}</p>
+  <!-- Add other project details here -->
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Close</button>
+</div>

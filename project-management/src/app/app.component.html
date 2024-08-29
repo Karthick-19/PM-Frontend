@@ -1,0 +1,14 @@
+<div>
+  <button (click)="openCreateProject()">Create Project</button>
+  
+  <ng-container *ngIf="isModalOpen">
+    <div class="modal-backdrop" (click)="closeCreateProject()"></div>
+    <div class="modal-content">
+      <app-project-create></app-project-create>
+      <button class="close-button" (click)="closeCreateProject()">X</button>
+    </div>
+  </ng-container>
+  <!-- <router-outlet name="modal"></router-outlet> -->
+</div>
+<router-outlet></router-outlet>
+<app-project-list></app-project-list>
