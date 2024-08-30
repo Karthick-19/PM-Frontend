@@ -3,7 +3,7 @@
     <ul>
       <li *ngFor="let project of projects">
         <p>{{ project.id }}</p>
-        <h2 (click)="viewProjectDetails(project.id)">{{ project.name }}</h2>
+        <h2 (click)="viewProjectDetails(project.id)" style="cursor: pointer;">{{ project.name }}</h2>
         <p>{{ project.description }}</p>
         <p>Created on: {{ project.createdDate|date:'mediumDate' }}</p>
         <p>Lead ID: {{ project.leadId }}</p>

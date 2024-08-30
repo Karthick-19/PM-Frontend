@@ -25,4 +25,7 @@ form {
     border: none;
     cursor: pointer;
   }
+  input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border-color: red;
+  }
   

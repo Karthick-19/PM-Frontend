@@ -46,6 +46,14 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+    <!-- <div>
+      <label for="deadline">Deadline:</label>
+      <input type="date" id="deadline" formControlName="deadline" />
+      <div *ngIf="projectForm.get('deadline')?.invalid && projectForm.get('deadline')?.touched">
+        <small *ngIf="projectForm.get('deadline')?.errors?.['required']">Deadline is required.</small>
+      </div>
+    </div> -->
+
     <!-- <mat-form-field>
         <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

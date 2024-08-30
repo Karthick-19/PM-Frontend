@@ -1,6 +1,7 @@
 /* src/app/project-detail/project-detail.component.scss */
 .project-detail-modal {
-    max-width: 1200px;
+    /* max-width: 1200px; */
+    /* width: 1200px; */
     max-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -20,7 +21,38 @@
     padding: 16px;
   }
   
-  .task-item {
-    margin-bottom: 16px;
-  }
-  
+  /* task-list.component.css */
+.task-item {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: red; /* or any color you prefer */
+}
+
+.modal-content {
+  width: 0%; /* Set the desired width */
+  /* max-width: 1000px; Optional: Set a maximum width */
+  margin: 0 auto; /* Center the modal horizontally */
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.delete-button:hover {
+  background-color: darkred;
+}

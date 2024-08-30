@@ -2,6 +2,7 @@
 <mat-card class="project-detail-modal">
   <mat-toolbar color="primary">
     <span>Project Details</span>
+    <span class="spacera"></span>
     <button mat-button (click)="openCreateTaskModal()">Add Task</button>
     <span class="spacer"></span>
     <button mat-icon-button (click)="closeModal()"> 
@@ -16,11 +17,15 @@
     <h3>Tasks</h3>
     <div *ngFor="let task of project.tasks" class="task-item">
       <mat-card>
+        <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         <h4>{{ task.name }}</h4>
         <p>{{ task.description }}</p>
         <p>Status: {{ task.status }}</p>
         <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar>
       </mat-card>
     </div>
+    <button (click)="onDeleteProject()" class="delete-button">
+      Delete Project
+    </button>
   </mat-card-content>
 </mat-card>

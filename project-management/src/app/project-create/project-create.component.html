@@ -1,5 +1,4 @@
-<p>project-create works!</p>
-<!-- src/app/components/project-create/project-create.component.html -->
+<!-- <p>project-create works!</p>
 <form (ngSubmit)="onSubmit()" #projectForm="ngForm">
     <div>
       <label for="name">Project Name:</label>
@@ -15,4 +14,39 @@
     </div>
     <button type="submit">Create Project</button>
   </form>
+   -->
+   <form (ngSubmit)="onSubmit(projectForm)" #projectForm="ngForm">
+    <div>
+      <label for="name">Project Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="project.name" #name="ngModel" required minlength="3">
+      <div *ngIf="name.invalid && name.touched">
+        <small *ngIf="name.errors?.['required']">Project name is required.</small>
+        <small *ngIf="name.errors?.['minlength']">Project name must be at least 3 characters long.</small>
+      </div>
+    </div>
   
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" [(ngModel)]="project.description" #description="ngModel" required></textarea>
+      <div *ngIf="description.invalid && description.touched">
+        <small *ngIf="description.errors?.['required']">Description is required.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="leadId">Lead ID:</label>
+      <input type="number" id="leadId" name="leadId" [(ngModel)]="project.leadId" #leadId="ngModel" required>
+      <div *ngIf="leadId.invalid && leadId.touched">
+        <small *ngIf="leadId.errors?.['required']">Lead ID is required.</small>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="projectForm.invalid">Create Project</button>
+  </form>
+  <!-- <div>
+    <label for="deadline">Deadline:</label>
+    <input type="date" id="deadline" formControlName="deadline" />
+    <div *ngIf="projectForm.get('deadline')?.invalid && projectForm.get('deadline')?.touched">
+      <small *ngIf="projectForm.get('deadline')?.errors?.['required']">Deadline is required.</small>
+    </div>
+  </div> -->

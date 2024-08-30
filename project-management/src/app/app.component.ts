@@ -20,7 +20,7 @@ export class AppComponent {
 
   openCreateProject(): void {
     this.isModalOpen = true;
-    this.router.navigate([{ outlets: { modal: ['projects/create'] } }]);
+    // this.router.navigate([{ outlets: { modal: ['projects/create'] } }]);
   }
 
   closeCreateProject(): void {
