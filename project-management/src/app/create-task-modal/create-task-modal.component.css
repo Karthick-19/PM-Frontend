@@ -1,0 +1,20 @@
+/* Modal styling */
+.mat-dialog-content {
+    max-height: 80vh; /* Adjust height to fit in the viewport */
+    overflow-y: auto; /* Add scroll if content overflows */
+  }
+  
+  .mat-form-field {
+    width: 100%; /* Ensure the form fields take up full width */
+  }
+  
+  textarea.mat-input-element {
+    resize: vertical; /* Allow vertical resize */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  

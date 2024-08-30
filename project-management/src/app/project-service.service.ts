@@ -27,7 +27,10 @@ export class ProjectServiceService {
     const url = `${this.baseUrl}/${projectId}`;
     return this.http.get<Project>(url);
   }
-  // getTasksByProject(projectId: number): Observable<any[]> {
-  //   return this.http.get<any[]>(`${this.baseUrl}?projectId=${projectId}`);
-  // }
+  getTasksByProject(projectId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}?projectId=${projectId}`);
+  }
+  getProjects(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl);
+  }
 }

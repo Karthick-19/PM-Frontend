@@ -1,10 +1,26 @@
-<p>project-detail-modal works!</p>
-<h1 mat-dialog-title>Project Details</h1>
-<div mat-dialog-content>
-  <p><strong>Name:</strong> {{ project.name }}</p>
-  <p><strong>Description:</strong> {{ project.description }}</p>
-  <!-- Add other project details here -->
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onClose()">Close</button>
-</div>
+<!-- src/app/project-detail/project-detail.component.html -->
+<mat-card class="project-detail-modal">
+  <mat-toolbar color="primary">
+    <span>Project Details</span>
+    <button mat-button (click)="openCreateTaskModal()">Add Task</button>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="closeModal()"> 
+       <mat-icon>close</mat-icon> 
+    </button>
+  </mat-toolbar>
+
+  <mat-card-content>
+    <h2>{{ project.name }}</h2>
+    <p>{{ project.description }}</p>
+
+    <h3>Tasks</h3>
+    <div *ngFor="let task of project.tasks" class="task-item">
+      <mat-card>
+        <h4>{{ task.name }}</h4>
+        <p>{{ task.description }}</p>
+        <p>Status: {{ task.status }}</p>
+        <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar>
+      </mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -38,9 +38,15 @@ export class ProjectListComponent {
   viewProjectDetails(projectId: any): void {
     console.log('Project ID:', projectId);  // This should log the ID
     this.router.navigate(['/projects', projectId]);
-    this.dialog.open(ProjectDetailModalComponent, {
-      // width: '500px',
-      data: { projectId }
+    const dialogRef = this.dialog.open(ProjectDetailModalComponent, {
+      width: '600px',
+      height: '80vh',
+      data: { projectId: projectId },
+      panelClass: 'custom-dialog-container'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
   

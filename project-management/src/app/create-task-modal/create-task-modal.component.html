@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>Create Task</h1>
+<div mat-dialog-content>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <label>Task Name</label>
+      <input matInput formControlName="name" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <label>Description</label>
+      <textarea matInput formControlName="description" rows="4"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <label>Status</label>
+      <mat-select formControlName="status">
+        <mat-option value="TODO">TODO</mat-option>
+        <mat-option value="ONGOING">ONGOING</mat-option>
+        <mat-option value="TESTING">TESTING</mat-option>
+        <mat-option value="COMPLETED">COMPLETED</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <label>Progress</label>
+      <input matInput type="number" formControlName="progress" required />
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="fill">
+      <label>Project ID</label>
+      <input matInput formControlName="projectId" type="number" required />
+    </mat-form-field> -->
+    <mat-form-field>
+        <mat-label>Project</mat-label>
+        <mat-select formControlName="projectId">
+          <mat-option *ngFor="let project of projects" [value]="project.id">
+            {{ project.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <label>Created Date</label>
+      <input matInput [matDatepicker]="picker" formControlName="createdDate" required />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> -->
+      
+    <mat-form-field appearance="fill">
+      <label>Deadline</label>
+      <input matInput [matDatepicker]="picker" formControlName="deadline" required />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-button type="submit" color="primary">Create</button>
+      <button mat-button type="button" (click)="closeModal()">Cancel</button>
+    </div>
+  </form>
+</div>
