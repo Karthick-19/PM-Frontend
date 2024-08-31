@@ -1,43 +1,42 @@
-<!-- src/app/project-detail/project-detail.component.html -->
 <mat-card class="project-detail-modal">
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" class="toolbar">
     <span>Project Details</span>
-    <span class="spacera"></span>
-    <button mat-button (click)="openCreateTaskModal()">Add Task</button>
     <span class="spacer"></span>
-    <button mat-button (click)="refreshComponent()">Refresh</button>
-
+    <button mat-button color="accent" (click)="openCreateTaskModal()">Add Task</button>
+    <button mat-button color="accent" (click)="refreshComponent()">Refresh</button>
     <button mat-icon-button (click)="closeModal()"> 
-       <mat-icon>close</mat-icon> 
+      <mat-icon>close</mat-icon> 
     </button>
   </mat-toolbar>
 
-  <mat-card-content>
-    <h2>{{ project.name }}</h2>
-    <p>{{ project.description }}</p>
+  <mat-card-content class="content">
+    <h2 class="project-name">{{ project.name }}</h2>
+    <p class="project-description">{{ project.description }}</p>
 
-    <h3>Tasks</h3>
+    <h3 class="tasks-title">Tasks</h3>
     <div *ngFor="let task of project.tasks" class="task-item">
-      <mat-card>
-        <!-- <div *ngFor="let task of tasks">
-          Task details here -->
-          <button mat-button (click)="openUpdateTaskModal(task)">Update Task</button>
-        <!-- </div>         -->
-        <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
-        <h4>{{ task.name }}</h4>
+      <mat-card class="task-card">
+        <div class="task-header">
+          <h4>{{ task.name }}</h4>
+          <!-- <button mat-button color="accent" (click)="openUpdateTaskModal(task)">Update</button> -->
+          <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
+        </div>
         <p>{{ task.description }}</p>
         <p>Status: {{ task.status }}</p>
-        <mat-progress-spinner
-      [value]="task.progress"
-      diameter="40"
-      strokeWidth="5"
-      mode="determinate"
-      class="progress-bar">
-    </mat-progress-spinner>
-        <!-- <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar> -->
+        <div class="task-progress">
+          <mat-progress-spinner
+            [value]="task.progress"
+            diameter="40"
+            strokeWidth="5"
+            mode="determinate"
+            class="progress-bar">
+          </mat-progress-spinner>
+          <span>{{ task.progress }}%</span>
+        </div>
+        <button mat-button color="accent" (click)="openUpdateTaskModal(task)" class="update-button">Update</button>
       </mat-card>
     </div>
-    <button (click)="onDeleteProject()" class="delete-button">
+    <button mat-button color="warn" (click)="onDeleteProject()" class="delete-button">
       Delete Project
     </button>
   </mat-card-content>

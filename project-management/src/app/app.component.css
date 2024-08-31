@@ -64,7 +64,7 @@
   z-index: 1001;
   opacity: 0;
   animation: modalAppear 0.3s forwards;
-  width: 400px;
+  width: 600px;
   max-width: 100%;
 }
 
