@@ -5,6 +5,20 @@
   flex-direction: column;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.mat-card-content::-webkit-scrollbar {
+  width: 0;
+  /* Hide scrollbar width */
+  background: transparent;
+  /* Hide scrollbar background */
+}
+
+.close-button {
+  /* background-color: black; */
+  color: white;
+  border-radius: 20%;
 }
 
 mat-toolbar {
@@ -24,7 +38,7 @@ mat-toolbar button {
 }
 
 mat-card-content {
-  overflow-y: auto;
+  overflow-y: scroll;
   padding: 16px;
   background-color: #f5f5f5;
   /* Light background to separate content */
@@ -46,12 +60,6 @@ mat-card-content {
   right: 10px;
   cursor: pointer;
   color: red;
-}
-
-.progress-bar {
-  position: absolute;
-  top: 20px;
-  right: 50px;
 }
 
 /* Modal Content Styling */
@@ -90,7 +98,7 @@ mat-card-content {
 .task-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
   margin-bottom: 8px;
 }
 
@@ -124,10 +132,34 @@ mat-card-content {
 .add-task {
   background-color: darkcyan;
   border: 2px solid;
+  height: 25px;
 }
 
-.refresh{
+.refresh {
   margin-left: 5px;
   background-color: burlywood;
   border: 1.5px solid;
+  height: 25px;
+}
+
+.task-name {
+  flex: 1;
+  /* font-size: 1.1rem; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deadline {
+  align-self: flex-start; /* Align to the start of the card */
+  color: red;
+  font-size: larger;
+  margin-top: 16px; /* Add space from the content above */
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center;
+  margin-top: auto; /* Pushes the footer to the bottom */
 }

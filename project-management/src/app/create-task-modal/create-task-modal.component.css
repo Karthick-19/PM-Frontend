@@ -1,20 +1,35 @@
-/* Modal styling */
+/* src/app/project-detail/project-detail.component.scss */
+
 .mat-dialog-content {
-    max-height: 80vh; /* Adjust height to fit in the viewport */
-    overflow-y: auto; /* Add scroll if content overflows */
-  }
-  
-  .mat-form-field {
-    width: 100%; /* Ensure the form fields take up full width */
-  }
-  
-  textarea.mat-input-element {
-    resize: vertical; /* Allow vertical resize */
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 16px;
-  }
-  
+  max-height: 80vh; /* Adjust height to fit within the viewport */
+  overflow-y: auto; /* Add scroll if content overflows */
+  padding: 24px; /* Add some padding to the modal content */
+}
+
+.form-field {
+  margin-bottom: 16px; /* Add space between form fields */
+}
+
+.mat-form-field {
+  width: 100%; /* Ensure form fields take up full width */
+}
+
+textarea.mat-input-element {
+  resize: vertical; /* Allow vertical resize of text area */
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px; /* Add space above the buttons */
+}
+
+.button-container button {
+  margin-left: 8px; /* Add space between buttons */
+}
+
+.mat-dialog-title {
+  text-align: center; /* Center-align the modal title */
+  font-size: 24px; /* Increase font size for the title */
+  margin-bottom: 16px; /* Add space below the title */
+}

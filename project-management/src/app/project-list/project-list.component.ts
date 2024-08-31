@@ -45,10 +45,9 @@ export class ProjectListComponent {
   //   }
   // }
   viewProjectDetails(projectId: any): void {
-    console.log('Project ID:', projectId);  // This should log the ID
+    console.log('Project ID:', projectId); 
     this.router.navigate(['/projects', projectId]);
     const dialogRef = this.dialog.open(ProjectDetailModalComponent, {
-      width: '800px',
       height: '80vh',
       data: { projectId: projectId },
       panelClass: 'custom-dialog-container'

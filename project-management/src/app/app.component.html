@@ -1,13 +1,35 @@
-<div>
-  <button mat-raised-button (click)="openCreateProject()" class="create-project">Create Project</button>  
-  <ng-container *ngIf="isModalOpen">
-    <div class="modal-backdrop" (click)="closeCreateProject()"></div>
-    <div class="modal-content">
-      <app-project-create></app-project-create>
-      <button class="close-button" (click)="closeCreateProject()">X</button>
-    </div>
-  </ng-container>
-  <!-- <router-outlet name="modal"></router-outlet> -->
+<div class="app-container">
+  <mat-toolbar color="primary" class="top-nav">
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-title">TeamSync</span>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" class="side-nav" [opened]="isSidenavOpen">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/projects" (click)="closeSidenav()">Projects</a>
+        <!-- Add more links as needed -->
+        <div class="bottom-nav">
+          <a mat-list-item routerLink="/settings">Settings</a>
+          <a mat-list-item routerLink="/edit-profile">Edit Profile</a>
+          <a mat-list-item (click)="logout()">Logout</a>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-content">
+      <button mat-raised-button (click)="openCreateProject()" class="create-project">Create Project</button>
+      <ng-container *ngIf="isModalOpen">
+        <div class="modal-backdrop" (click)="closeCreateProject()"></div>
+        <div class="modal-content">
+          <app-project-create></app-project-create>
+          <button class="close-button" (click)="closeCreateProject()">X</button>
+        </div>
+      </ng-container>
+      <!-- The main router outlet for replacing content -->
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
-<router-outlet></router-outlet>
-<!-- <app-project-list></app-project-list> -->

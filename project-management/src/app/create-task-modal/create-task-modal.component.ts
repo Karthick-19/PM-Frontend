@@ -38,6 +38,7 @@ export class CreateTaskModalComponent {
   taskForm: FormGroup;
   projects: any[] = []; // List of projects
   project!: Project;
+  progressOptions: number[] = [0, 25, 50, 75, 100];
 
 
   constructor(
