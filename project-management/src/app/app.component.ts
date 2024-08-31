@@ -56,4 +56,14 @@ export class AppComponent {
     console.log('User logged out');
     this.router.navigate(['/login']); // Adjust this route as needed
   }
+
+  navigateToEdit(){
+    this.router.navigate(['/edit-profile'])
+    this.closeSidenav()
+  }
+
+  navigateToProject(){
+    this.router.navigate(['/projects'])
+    this.closeSidenav()
+  }
 }

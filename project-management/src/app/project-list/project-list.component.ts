@@ -7,11 +7,14 @@ import { Router } from '@angular/router';
 import { ProjectDetailModalComponent } from '../project-detail-modal/project-detail-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangeDetectorRef } from '@angular/core';
+import { ProjectCreateComponent } from '../project-create/project-create.component';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
   selector: 'app-project-list',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,ProjectCreateComponent,MatButtonModule],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css'
 })
@@ -19,6 +22,7 @@ export class ProjectListComponent {
 
   projects: Project[] = [];
   inputProjectId!: number;
+  isModalOpen=false;
 
   constructor(private projectService: ProjectServiceService,private router: Router,public dialog: MatDialog
     ,private cdr: ChangeDetectorRef
@@ -31,23 +35,19 @@ export class ProjectListComponent {
     this.projectService.projects$.subscribe(projects => {
       this.projects = projects;
     });
-    
-
+  }
+  openCreateProject(): void {
+    this.isModalOpen = true;
   }
 
-  
-
-  // viewProjectDetails(projectId:any): void {
-  //   if (this.inputProjectId) {
-  //     this.router.navigate(['/projects', this.inputProjectId]);
-  //   } else {
-  //     console.error('Project ID is required');
-  //   }
-  // }
+  closeCreateProject(): void {
+    this.isModalOpen = false;
+  }
   viewProjectDetails(projectId: any): void {
     console.log('Project ID:', projectId); 
     this.router.navigate(['/projects', projectId]);
     const dialogRef = this.dialog.open(ProjectDetailModalComponent, {
+      width:'1000px',
       height: '80vh',
       data: { projectId: projectId },
       panelClass: 'custom-dialog-container'

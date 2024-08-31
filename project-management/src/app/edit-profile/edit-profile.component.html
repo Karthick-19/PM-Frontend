@@ -1,29 +1,24 @@
-<p>edit-profile works!</p>
-<mat-card class="edit-profile-card">
-    <mat-toolbar color="primary">
-      <span>Edit Profile</span>
-    </mat-toolbar>
-  
-    <mat-card-content>
-      <form>
-        <mat-form-field appearance="fill">
-          <mat-label>Username</mat-label>
-          <input matInput placeholder="Enter your username" />
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" placeholder="Enter your email" />
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Enter your password" />
-        </mat-form-field>
-  
-        <button mat-raised-button color="primary" type="submit">Save</button>
-        <button mat-button color="warn" type="button" (click)="cancel()">Cancel</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
-  
+<div class="edit-profile-container">
+  <h2>Edit Profile</h2>
+  <form class="edit-profile-form">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" type="text" [(ngModel)]="user.name" name="name" required />
+    </div>
+    <div class="form-group">
+      <label for="timezone">Time Zone</label>
+      <select id="timezone" name="timezone" class="form-control">
+        <option *ngFor="let timezone of timezones" [value]="timezone">{{ timezone }}</option>
+      </select>
+    </div>
+    <!-- Add more fields as necessary -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" [(ngModel)]="user.email" name="email" required />
+    </div>
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+      <button mat-button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
