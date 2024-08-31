@@ -32,10 +32,16 @@
 
 .delete-icon {
   position: absolute;
-  top: 10px;
+  top: 30px;
   right: 10px;
   cursor: pointer;
   color: red; /* or any color you prefer */
+}
+.progress-bar{
+  position:absolute;
+  top: 60px;
+  right: 10px;
+  cursor: pointer;
 }
 
 .modal-content {

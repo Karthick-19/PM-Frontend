@@ -12,11 +12,14 @@ import { Router } from '@angular/router';
 import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskService } from '../task.service';
+import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 @Component({
   standalone:true,
-  imports:[MatCardModule,MatIconModule,MatToolbarModule,MatProgressBarModule,CommonModule],
+  imports:[MatCardModule,MatIconModule,MatToolbarModule,MatProgressBarModule,CommonModule,MatProgressSpinnerModule],
   selector: 'app-project-detail-modal',
   templateUrl: './project-detail-modal.component.html',
   styleUrls: ['./project-detail-modal.component.css']
@@ -38,7 +41,11 @@ export class ProjectDetailModalComponent implements OnInit {
     this.getProjectDetails(this.data.projectId);
     
   }
-
+  refreshComponent(): void {
+    this.getProjectDetails(this.project.id);
+    // this.(this.project.id);
+  }
+  
   getProjectDetails(projectId: number): void {
     this.projectService.getProjectById(projectId).subscribe(data => {
       this.project = data;
@@ -58,8 +65,7 @@ export class ProjectDetailModalComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Handle the new task data here
-        console.log('Task Created:', result);
+        this.taskService.getTasksByProject(this.project.id);  // Refresh the tasks list
       }
     });
   }
@@ -67,29 +73,44 @@ export class ProjectDetailModalComponent implements OnInit {
   deleteTask(taskId: number): void {
     this.taskService.deleteTask(taskId).subscribe(
       () => {
-        // Remove the task from the UI after successful deletion
         this.tasks = this.tasks.filter((task: { id: number; }) => task.id !== taskId);
         console.log('Task deleted successfully');
+        this.getProjectDetails(this.project.id);
       },
       (      error: any) => {
         console.error('Error deleting task', error);
       }
-    );}
+    );
+  }
 
     onDeleteProject(): void {
       const confirmed = confirm('Are you sure you want to delete this project?');
       if (confirmed) {
         this.projectService.deleteProject(this.project.id).subscribe(() => {
-          alert('Project deleted successfully');
+          // alert('Project deleted successfully');
           this.router.navigate(['/projects']); // Navigate to the project list or any other appropriate route
         }, error => {
           console.error('Error deleting project', error);
         });
+        this.closeModal()
       }
     }
   // openTaskCreate() {
   //   this.router.navigate(['/task-create']);
   // }
+  openUpdateTaskModal(task: any): void {
+    const dialogRef = this.dialog.open(UpdateTaskModalComponent, {
+      data: { task }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getProjectDetails(this.project.id); // Refresh tasks if update was successful
+      }
+    });
+  }
+  
+  
   } 
 
 

@@ -5,6 +5,8 @@
     <span class="spacera"></span>
     <button mat-button (click)="openCreateTaskModal()">Add Task</button>
     <span class="spacer"></span>
+    <button mat-button (click)="refreshComponent()">Refresh</button>
+
     <button mat-icon-button (click)="closeModal()"> 
        <mat-icon>close</mat-icon> 
     </button>
@@ -17,11 +19,22 @@
     <h3>Tasks</h3>
     <div *ngFor="let task of project.tasks" class="task-item">
       <mat-card>
+        <!-- <div *ngFor="let task of tasks">
+          Task details here -->
+          <button mat-button (click)="openUpdateTaskModal(task)">Update Task</button>
+        <!-- </div>         -->
         <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         <h4>{{ task.name }}</h4>
         <p>{{ task.description }}</p>
         <p>Status: {{ task.status }}</p>
-        <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar>
+        <mat-progress-spinner
+      [value]="task.progress"
+      diameter="40"
+      strokeWidth="5"
+      mode="determinate"
+      class="progress-bar">
+    </mat-progress-spinner>
+        <!-- <mat-progress-bar mode="determinate" [value]="task.progress"></mat-progress-bar> -->
       </mat-card>
     </div>
     <button (click)="onDeleteProject()" class="delete-button">

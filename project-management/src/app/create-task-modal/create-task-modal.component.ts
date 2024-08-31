@@ -11,12 +11,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { TaskService } from '../task.service';
 import { ProjectServiceService } from '../project-service.service';
+import { Task } from '../tasks';
+import { Project } from '../project';
 
 
 
 @Component({
-  standalone:true,
-  imports:[  MatDialogModule,
+  standalone: true,
+  imports: [MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -29,12 +31,14 @@ import { ProjectServiceService } from '../project-service.service';
     MatSelectModule
   ],
   selector: 'app-create-task-modal',
-  templateUrl:'./create-task-modal.component.html',
-  styleUrls:['./create-task-modal.component.css']
+  templateUrl: './create-task-modal.component.html',
+  styleUrls: ['./create-task-modal.component.css']
 })
 export class CreateTaskModalComponent {
   taskForm: FormGroup;
   projects: any[] = []; // List of projects
+  project!: Project;
+
 
   constructor(
     private fb: FormBuilder,
@@ -58,24 +62,26 @@ export class CreateTaskModalComponent {
       this.projects = projects;
     });
   }
-
+  getProjectDetails(projectId: number): void {
+    this.projectService.getProjectById(projectId).subscribe(data => {
+      this.project = data;
+    });
+  }
   onSubmit(): void {
     if (this.taskForm.valid) {
-      // Fetch the selected project
       const projectId = this.taskForm.value.projectId;
       const selectedProject = this.projects.find(project => project.id === projectId);
-
+  
       if (selectedProject) {
         const task = {
           ...this.taskForm.value,
-          project: selectedProject // Include the full project object
+          project: selectedProject
         };
-
-        // Submit the task data
+  
         this.taskService.createTask(task).subscribe(
           response => {
             console.log('Task created successfully', response);
-            this.dialogRef.close();
+            this.dialogRef.close(response);  // Pass the response (or true) to indicate success
           },
           error => {
             console.error('Error creating task', error);
@@ -84,8 +90,10 @@ export class CreateTaskModalComponent {
       } else {
         console.error('Selected project not found');
       }
+
     }
-  }
+    // this.getProjectDetails(this.data.projectId); 
+  }  
 
   closeModal(): void {
     this.dialogRef.close();
