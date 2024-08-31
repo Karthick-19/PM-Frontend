@@ -2,9 +2,11 @@
   <mat-toolbar color="primary" class="toolbar">
     <span>Project Details</span>
     <span class="spacer"></span>
-    <button mat-button color="accent" (click)="openCreateTaskModal()">Add Task</button>
-    <button mat-button color="accent" (click)="refreshComponent()">Refresh</button>
-    <button mat-icon-button (click)="closeModal()"> 
+    <!-- <button mat-button color="accent" (click)="openCreateTaskModal()">Add Task</button> -->
+    <button mat-raised-button color="warn" class="add-task" (click)="openCreateTaskModal()">Add Task</button>
+
+    <button mat-raised-button color="primary" class="refresh" (click)="refreshComponent()">Refresh</button>
+    <button mat-icon-button (click)="closeModal()" style="color: black;margin-left: 5px;"> 
       <mat-icon>close</mat-icon> 
     </button>
   </mat-toolbar>

@@ -114,8 +114,20 @@ mat-card-content {
   transform: translateY(-2px);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
 .update-button {
   align-self: flex-end;
   margin-top: auto;
   margin-bottom: 0;
+}
+
+.add-task {
+  background-color: darkcyan;
+  border: 2px solid;
+}
+
+.refresh{
+  margin-left: 5px;
+  background-color: burlywood;
+  border: 1.5px solid;
 }

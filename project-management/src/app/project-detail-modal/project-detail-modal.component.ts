@@ -14,12 +14,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { TaskService } from '../task.service';
 import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { MatButton } from '@angular/material/button';
 
 
 @Component({
   standalone:true,
-  imports:[MatCardModule,MatIconModule,MatToolbarModule,MatProgressBarModule,CommonModule,MatProgressSpinnerModule],
+  imports:[MatCardModule,MatIconModule,MatToolbarModule,MatProgressBarModule,CommonModule,MatProgressSpinnerModule,MatButton],
   selector: 'app-project-detail-modal',
   templateUrl: './project-detail-modal.component.html',
   styleUrls: ['./project-detail-modal.component.css']
