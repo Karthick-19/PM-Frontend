@@ -1,6 +1,5 @@
 <div>
-  <button (click)="openCreateProject()">Create Project</button>
-  
+  <button mat-raised-button (click)="openCreateProject()" class="create-project">Create Project</button>  
   <ng-container *ngIf="isModalOpen">
     <div class="modal-backdrop" (click)="closeCreateProject()"></div>
     <div class="modal-content">

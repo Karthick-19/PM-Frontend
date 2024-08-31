@@ -32,3 +32,61 @@
     cursor: pointer;
   }
   
+  .create-project{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  /* align-content: end; */
+  margin-top: 20px; /* Adjust as needed */
+  }
+
+  
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1001;
+  opacity: 0;
+  animation: modalAppear 0.3s forwards;
+  width: 400px;
+  max-width: 100%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalAppear {
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

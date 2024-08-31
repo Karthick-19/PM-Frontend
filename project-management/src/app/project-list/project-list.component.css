@@ -1,0 +1,22 @@
+.project-list-item {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    width: 60%;
+  }
+  
+  .project-list-item:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    cursor: pointer;
+  }
+  
+  .project-list-item p, .project-list-item h2 {
+    margin: 0;
+    padding: 5px 0;
+  }
+  
+  

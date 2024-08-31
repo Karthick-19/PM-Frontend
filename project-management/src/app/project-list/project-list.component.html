@@ -1,7 +1,7 @@
-<p>project-list works!</p>
+<!-- <p>project-list works!</p> -->
 <div *ngIf="projects.length > 0; else noProjects">
     <ul>
-      <li *ngFor="let project of projects">
+      <li *ngFor="let project of projects" class="project-list-item">
         <p>{{ project.id }}</p>
         <h2 (click)="viewProjectDetails(project.id)" style="cursor: pointer;">{{ project.name }}</h2>
         <p>{{ project.description }}</p>
