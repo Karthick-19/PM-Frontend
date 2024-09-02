@@ -7,11 +7,16 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 export const routes: Routes =
   [
+    // { path: 'projects', component: ProjectListComponent, children: [
+    //   { path: ':id', component: ProjectDetailComponent }
+    // ] },
+    { path: 'projects/:id', component: ProjectDetailComponent },
     { path: 'projects', component: ProjectListComponent },
     { path: 'projects/create', component: ProjectCreateComponent, outlet: 'modal' },
     { path: 'edit-profile', component: EditProfileComponent },
     { path: '', redirectTo: '/projects', pathMatch: 'full' },
-    { path: '**', redirectTo: '/projects' }
+    { path: '**', redirectTo: '/projects' },
+    
   ];
 
 

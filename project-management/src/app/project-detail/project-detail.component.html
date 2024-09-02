@@ -1,11 +1,54 @@
 <div *ngIf="project">
+  <button (click)="goBack()" class="back-button">Back to Projects</button>
+
     <h2>{{ project.name }}</h2>
     <p>{{ project.description }}</p>
-    <h3>Tasks:</h3>
-    <ul>
-      <li *ngFor="let task of tasks">
-        <strong>{{ task.name }}</strong>: {{ task.description }} (Status: {{ task.status }})
-      </li>
-    </ul>
+    <div class="kanban-board">
+      <div class="kanban-column">
+        <h3>TODO</h3>
+        <div *ngFor="let task of project.tasks | filterByStatus: taskStatus.TODO" class="task-card">
+          <h4>{{ task.name }}</h4>
+          <p>{{ task.description }}</p>
+          <p>Status: {{ task.status }}</p>
+          <p>Progress: {{ task.progress }}%</p>
+          <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
+          <button (click)="openUpdateTaskModal(task)">Update</button>
+        </div>
+      </div>
+      <div class="kanban-column">
+        <h3>Ongoing</h3>
+        <div *ngFor="let task of project.tasks | filterByStatus: taskStatus.ONGOING" class="task-card">
+          <h4>{{ task.name }}</h4>
+          <p>{{ task.description }}</p>
+          <p>Status: {{ task.status }}</p>
+          <p>Progress: {{ task.progress }}%</p>
+          <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
+          <button (click)="openUpdateTaskModal(task)">Update</button>
+        </div>
+      </div>
+      <div class="kanban-column">
+        <h3>Testing</h3>
+        <div *ngFor="let task of project.tasks | filterByStatus: taskStatus.TESTING" class="task-card">
+          <h4>{{ task.name }}</h4>
+          <p>{{ task.description }}</p>
+          <p>Status: {{ task.status }}</p>
+          <p>Progress: {{ task.progress }}%</p>
+          <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
+          <button (click)="openUpdateTaskModal(task)">Update</button>
+        </div>
+      </div>
+      <div class="kanban-column">
+        <h3>Completed</h3>
+        <div *ngFor="let task of project.tasks | filterByStatus: taskStatus.COMPLETED" class="task-card">
+          <h4>{{ task.name }}</h4>
+          <p>{{ task.description }}</p>
+          <p>Status: {{ task.status }}</p>
+          <p>Progress: {{ task.progress }}%</p>
+          <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
+          <button (click)="openUpdateTaskModal(task)">Update</button>
+        </div>
+      </div>
+    </div>
+    
   </div>
   

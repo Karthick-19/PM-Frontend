@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { TimezoneconverterComponent } from './timezoneconverter/timezoneconverter.component';
 import { MatDialog } from '@angular/material/dialog';
+// import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 
 @Component({
@@ -28,6 +29,7 @@ import { MatDialog } from '@angular/material/dialog';
     MatIconModule,
     MatListModule,
     TimezoneconverterComponent,
+    // BrowserAnimationsModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -74,7 +76,7 @@ export class AppComponent {
   openTimeZoneConverter(): void {
     this.dialog.open(TimezoneconverterComponent, {
       width: '500px',
-      height: '80vh'
+      height: '70vh'
     });
   }
 }
