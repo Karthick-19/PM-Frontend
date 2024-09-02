@@ -1,0 +1,33 @@
+<div class="modal-container">
+    <h2>Time Zone Converter</h2>
+
+    <div class="dateTimePicker">
+        <mat-form-field appearance="fill">
+            <mat-label>Select Date and Time</mat-label>
+            <input matInput [(ngModel)]="selectedDate" type="datetime-local" name="datetimepicker">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill">
+        <mat-label>From Location</mat-label>
+        <mat-select [(ngModel)]="fromLocation">
+            <mat-option *ngFor="let timezone of timezones" [value]="timezone">
+                {{ timezone }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>To Location</mat-label>
+        <mat-select [(ngModel)]="toLocation">
+            <mat-option *ngFor="let timezone of timezones" [value]="timezone">
+                {{ timezone }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="convertTime()">Convert</button>
+    <div *ngIf="convertedTime">
+        <p>Converted Time: {{ convertedTime | date:'medium' }}</p>
+    </div>
+</div>

@@ -9,6 +9,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { TimezoneconverterComponent } from './timezoneconverter/timezoneconverter.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-root',
@@ -23,7 +26,8 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    TimezoneconverterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -33,7 +37,7 @@ export class AppComponent {
   isModalOpen = false;
   isSidenavOpen = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private dialog: MatDialog) {}
 
   openCreateProject(): void {
     this.isModalOpen = true;
@@ -65,5 +69,12 @@ export class AppComponent {
   navigateToProject(){
     this.router.navigate(['/projects'])
     this.closeSidenav()
+  }
+
+  openTimeZoneConverter(): void {
+    this.dialog.open(TimezoneconverterComponent, {
+      width: '500px',
+      height: '80vh'
+    });
   }
 }

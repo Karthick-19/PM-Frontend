@@ -9,12 +9,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { ChangeDetectorRef } from '@angular/core';
 import { ProjectCreateComponent } from '../project-create/project-create.component';
 import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @Component({
   selector: 'app-project-list',
   standalone: true,
-  imports: [CommonModule,FormsModule,ProjectCreateComponent,MatButtonModule],
+  imports: [CommonModule,FormsModule,ProjectCreateComponent,MatButtonModule,MatIconModule],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css'
 })
@@ -23,6 +25,7 @@ export class ProjectListComponent {
   projects: Project[] = [];
   inputProjectId!: number;
   isModalOpen=false;
+  notifications = ['Notification 1', 'Notification 2', 'Notification 3']; 
 
   constructor(private projectService: ProjectServiceService,private router: Router,public dialog: MatDialog
     ,private cdr: ChangeDetectorRef

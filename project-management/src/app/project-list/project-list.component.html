@@ -1,21 +1,23 @@
 <!-- <p>project-list works!</p> -->
-<div *ngIf="projects.length > 0; else noProjects">
-  <button mat-raised-button (click)="openCreateProject()" class="create-project">Create Project</button>
-  <ng-container *ngIf="isModalOpen">
-    <div class="modal-backdrop" (click)="closeCreateProject()"></div>
-    <div class="modal-content">
-      <app-project-create></app-project-create>
-      <button class="close-button" (click)="closeCreateProject()">X</button>
-    </div>
-  </ng-container>
-  <ul>
-    <li *ngFor="let project of projects" class="project-list-item" (click)="viewProjectDetails(project.id)">
-      <p>{{ project.id }}</p>
-      <h2 style="cursor: pointer;">{{ project.name }}</h2>
-      <p>{{ project.description }}</p>
-      <p>Created on: {{ project.createdDate|date:'mediumDate' }}</p>
-      <p>Lead ID: {{ project.leadId }}</p>
-      <!-- <ul>
+<div class="project-list-container">
+  <div class="main-content">
+    <div *ngIf="projects.length > 0; else noProjects">
+      <button mat-raised-button (click)="openCreateProject()" class="create-project">Create Project</button>
+      <ng-container *ngIf="isModalOpen">
+        <div class="modal-backdrop" (click)="closeCreateProject()"></div>
+        <div class="modal-content">
+          <app-project-create></app-project-create>
+          <button class="close-button" (click)="closeCreateProject()">X</button>
+        </div>
+      </ng-container>
+      <ul>
+        <li *ngFor="let project of projects" class="project-list-item" (click)="viewProjectDetails(project.id)">
+          <p>{{ project.id }}</p>
+          <h2 style="cursor: pointer;">{{ project.name }}</h2>
+          <p>{{ project.description }}</p>
+          <p>Created on: {{ project.createdDate|date:'mediumDate' }}</p>
+          <p>Lead ID: {{ project.leadId }}</p>
+          <!-- <ul>
             <li *ngFor="let task of project.tasks">
               <h4>{{ task.name }}</h4>
               <p>Status: {{ task.status }}</p>
@@ -23,9 +25,18 @@
               <p>Deadline: {{ task.deadline }}</p>
             </li>
           </ul> -->
-    </li>
-  </ul>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noProjects>
+      <p>No projects available.</p>
+    </ng-template>
+  </div>
+  <div class="notification-space">
+    <h3>Notifications <mat-icon>notifications</mat-icon>
+    </h3>
+    <ul>
+      <li *ngFor="let notification of notifications">{{ notification }} </li>
+    </ul>
+  </div>
 </div>
-<ng-template #noProjects>
-  <p>No projects available.</p>
-</ng-template>
