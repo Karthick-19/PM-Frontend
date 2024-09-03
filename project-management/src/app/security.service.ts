@@ -32,6 +32,25 @@ export class SecurityService {
     return this.http.get<UserRegister>(`${this.url}/userdetails/${newUser.username}`, {headers});
   }
 
+
+  getLoggedinUser2(newUser: UserLogin): Observable<UserRegister>{
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${this.jwt}`);
+    return this.http.get<UserRegister>(`${this.url}/userdetails/${newUser.username}`, {headers});
+  }
+
+  private getJwt(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  // getLoggedinUser2(): Observable<UserRegister> {
+  //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getJwt()}`);
+  //   return this.http.get<UserRegister>(`${this.url}/userdetailsid/${newUser}`, { headers });
+  // }
+  // getLoggedinUser(): Observable<UserRegister> {
+  //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.jwt}`);
+  //   return this.http.get<UserRegister>(`${this.url}/userdetails/`, { headers });
+  // }
+
   signOut(){
     localStorage.removeItem('token');
     this.router.navigate(['/']);

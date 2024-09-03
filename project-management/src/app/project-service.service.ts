@@ -78,4 +78,10 @@ export class ProjectServiceService {
     ).subscribe(updatedProjects => this.projectsSubject.next(updatedProjects));
   }
 
+  // getProjectsByUserId(userId: number): Observable<Project[]> {
+  //   return this.http.get<Project[]>(`${this.baseUrl}/${userId}`);
+  // }
+  getProjectsByUserId(userId: number): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.baseUrl}/user/${userId}`);
+  }
 }

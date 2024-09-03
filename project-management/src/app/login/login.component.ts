@@ -30,11 +30,16 @@ export class LoginComponent {
         localStorage.setItem('token', data);
         this.securityService.jwt = data;
  
-        this.securityService.getLoggedinUser(this.user).subscribe({
-          next: (data) => {this.securityService.currentUser = data},
-          error: (error) => {console.error(error)}
-        });
- 
+        // Fetch user details using the email ID
+        this.securityService.getLoggedinUser2(this.user).subscribe({
+          next: (userData) => {
+            console.log('User Data:', userData); // Log the user data to the console
+            localStorage.setItem('userId', userData.id.toString());
+          },
+          error: (error) => {
+            console.error('Error fetching user details:', error);
+          }
+        }); 
         this.router.navigate(['/projects']);
       },
       error: (error: any) => {

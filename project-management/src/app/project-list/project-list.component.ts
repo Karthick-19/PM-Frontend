@@ -28,13 +28,72 @@ export class ProjectListComponent {
   inputProjectId!: number;
   isModalOpen=false;
   notifications = ['Notification 1', 'Notification 2', 'Notification 3']; 
+  userId:number=2000;
 
   constructor(private projectService: ProjectServiceService,private router: Router,public dialog: MatDialog
     ,private cdr: ChangeDetectorRef, private securityService: SecurityService
   ) { }
 
+  // ngOnInit(): void {
+  //   // this.projectService.getAllProjects().subscribe(data => {
+  //   //   this.projects = data;
+  //   // });
+  //   // this.projectService.projects$.subscribe(projects => {
+  //   //   this.projects = projects;
+  //   // });
+    
+  //   const userId = localStorage.getItem('userId');
+  //   if (userId) {
+  //     // Convert user ID to number
+  //     const userIdNumber = Number(userId);
+      
+  //     // Fetch projects for the user ID
+  //     this.projectService.getProjectsByUserId(userIdNumber).subscribe({
+  //       next: (projects) => {
+  //         this.projects = projects;
+  //       },
+  //       error: (error) => {
+  //         console.error('Error fetching projects:', error);
+  //       }
+  //     });
+  //   } else {
+  //     console.log('No user ID found in localStorage.');
+  //   }
+  //   // this.loadProjectsByUserId(this.userId);
+  //   // this.securityService.getLoggedinUser2().subscribe(user => {
+  //   //   this.userId = user.id; // Assuming `id` is the user ID property
+  //   //   if (this.userId !== null) {
+  //   //     this.loadProjectsByUserId(this.userId);
+  //   //   } else {
+  //   //     console.error('User ID is null');
+  //   //     // Handle the case where user ID is not available (e.g., redirect to login page)
+  //   //   }
+  //   // });
+    
+
+  // }
   ngOnInit(): void {
-    this.projectService.getAllProjects().subscribe(data => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      // Convert user ID to number
+      const userIdNumber = Number(userId);
+      
+      // Fetch projects for the user ID
+      this.projectService.getProjectsByUserId(userIdNumber).subscribe({
+        next: (projects) => {
+          this.projects = projects;
+        },
+        error: (error) => {
+          console.error('Error fetching projects:', error);
+        }
+      });
+    } else {
+      console.log('No user ID found in localStorage.');
+    }
+  }
+
+  loadProjectsByUserId(userId: number): void {
+    this.projectService.getProjectsByUserId(userId).subscribe(data => {
       this.projects = data;
     });
     this.projectService.projects$.subscribe(projects => {
