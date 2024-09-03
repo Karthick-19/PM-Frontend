@@ -53,7 +53,7 @@ export class CreateTaskModalComponent {
       description: ['', Validators.required],
       status: ['TODO', Validators.required],
       progress: [0, Validators.required],
-      projectId: [null, Validators.required],
+      projectId: [data.projectId, Validators.required],
       createdDate: [new Date(), Validators.required],
       deadline: [new Date(), Validators.required]
     });

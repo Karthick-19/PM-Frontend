@@ -1,0 +1,116 @@
+main{
+    height: auto;
+    background-color: #6D9886;
+}
+ 
+/* .contain{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 91%
+} */
+ 
+/* Ensure the container has relative positioning */
+.contain {
+    position: relative;
+    width: 100%;
+    height: auto; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-image: url('/assets/home-bg.jpg'); /* Replace with your actual image URL */
+    background-size: contain;
+    background-position: center;
+    overflow: hidden;
+    z-index: 1;
+}
+/*
+h2,p{
+    color: rgb(181, 181, 181);
+} */
+ 
+/* Overlay to dim and blur the background image */
+.contain::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay for dimming effect */
+    backdrop-filter: blur(8px); /* Blur effect to make background less focused */
+    z-index: 0; /* Place the overlay behind the content */
+}
+ 
+/* Styling for the content rows inside the container */
+.content-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px 0;
+    z-index: 1;
+}
+ 
+/* Alternating alignment for content rows */
+.content-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+ 
+/* Card styling for each content item */
+.card {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+ 
+/* Hover effect for cards */
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+ 
+/* Flex properties for text and image content */
+.text-content {
+    flex: 1;
+    padding: 20px;
+    max-width: 600px;
+    color: #bebebe;
+}
+ 
+.text-content h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+ 
+.image-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+ 
+.image-content img {
+    max-width: 70%;
+    height: auto;
+}
+ 
+footer {
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background for contrast */
+    color: #fff; /* White text color */
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    height: 40px;
+}

@@ -38,6 +38,7 @@
     padding: 20px;
     border-radius: 8px;
     min-width: 600px;
+    width: 60%;
     z-index: 1001; /* Higher than backdrop to ensure it's visible */
   }
   

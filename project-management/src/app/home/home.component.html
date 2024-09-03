@@ -1,0 +1,70 @@
+<main>
+  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">TeamSync</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="#contact">About</a>
+            <a class="nav-link" routerLink="/projects">Projects</a>
+            <a class="nav-link" routerLink="/login">Login</a>
+          </div>
+        </div>
+      </div>
+  </nav>
+ 
+  <div class="contain">
+    <!-- First Row -->
+    <div class="content-row">
+        <div class="text-content" >
+            <h2>Project Overview</h2>
+            <p>
+                This website helps people working together in various remote locations to collaborate and update the status of the tasks distributed to them.
+                It brings transparency to task management and enhances productivity by streamlining communication and task tracking.
+            </p>
+        </div>
+        <div class="image-content">
+            <img src="/assets/task1.png" alt="Project Overview">
+        </div>
+    </div>
+ 
+    <!-- Second Row -->
+    <div class="content-row">
+      <div class="text-content">
+        <h2>More Details</h2>
+        <p>
+          Our platform integrates with various tools to provide seamless task management and communication features. Users can easily track their progress,
+          manage tasks, and collaborate with their teams. The interface is designed to be intuitive and user-friendly.
+        </p>
+      </div>
+      <div class="image-content">
+          <img src="/assets/task2.png" alt="More Details">
+      </div>
+    </div>
+ 
+    <!-- Third Row -->
+    <div class="content-row" id="contact">
+        <div class="text-content">
+            <h2>Contact Us</h2>
+            <p>
+                For more information or inquiries, please reach out to us at:
+                <br>
+                <strong>Email:</strong> support teamsync.com
+                <br>
+                <strong>Phone:</strong> +1-234-567-890
+            </p>
+        </div>
+        <div class="image-content">
+            <img src="/assets/task3.png" alt="Contact">
+        </div>
+      </div>
+  </div>
+ 
+  <footer>
+    <p>&copy; 2024 All Rights Reserved</p>
+</footer>
+ 
+</main>
+<router-outlet></router-outlet>

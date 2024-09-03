@@ -1,23 +1,26 @@
-<p>update-task-modal works!</p>
-<h2 mat-dialog-title>Update Task</h2>
-<mat-dialog-content>
+<h2 class="modal-title">Update Task</h2>
+<div class="modal-content">
   <form>
-    <mat-form-field>
-      <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="task.status" name="status">
-        <mat-option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="form-field">
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="task.status" name="status">
+          <mat-option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <mat-label>Progress</mat-label>
-      <mat-select [(ngModel)]="task.progress" name="progress">
-        <mat-option *ngFor="let progress of progressOptions" [value]="progress">{{ progress }}%</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="form-field">
+      <mat-form-field appearance="fill">
+        <mat-label>Progress</mat-label>
+        <mat-select [(ngModel)]="task.progress" name="progress">
+          <mat-option *ngFor="let progress of progressOptions" [value]="progress">{{ progress }}%</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onUpdate()">Update</button>
+</div>
+<div class="modal-actions">
+  <button mat-raised-button color="primary" (click)="onUpdate()">Update</button>
   <button mat-button mat-dialog-close>Cancel</button>
-</mat-dialog-actions>
+</div>

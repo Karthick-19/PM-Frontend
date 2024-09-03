@@ -1,0 +1,44 @@
+<body>
+    <div class="contain">
+        <div class="login-card">
+            <h2>Sign Up</h2>
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="number" name="userid" id="userid" placeholder="ID" [(ngModel)]="userId" minlength="4" required #idcheck="ngModel">
+                    <label for="userid">ID</label>
+                    <div *ngIf="idcheck.invalid && idcheck.touched" class="alert">
+                        <div *ngIf="idcheck.errors?.['required']">ID required !</div>
+                        <div *ngIf="idcheck.errors?.['minlength']">ID must be at least 4 chars long !</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="name" id="name" placeholder="Name" [(ngModel)]="user.name" required minlength="3" #namecheck="ngModel">
+                    <label for="name">Name</label>
+                    <div *ngIf="namecheck.invalid && namecheck.touched" class="alert">
+                        <div *ngIf="namecheck.errors?.['required']">Name is required !</div>
+                        <div *ngIf="namecheck.errors?.['minlength']">Name must be at least 3 chars long !</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" placeholder="Email" [(ngModel)]="user.username" required email #emailcheck="ngModel">
+                    <label for="email">Email</label>
+                    <div *ngIf="emailcheck.invalid && emailcheck.touched" class="alert">
+                        <div *ngIf="emailcheck.errors?.['required']">Email is required !</div>
+                        <div *ngIf="emailcheck.errors?.['email']">Please provide valid email address.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" placeholder="Password" required minlength="8" maxlength="20" [(ngModel)]="user.password" #passcheck="ngModel">
+                    <label for="password">Password</label>
+                    <div *ngIf="passcheck.invalid && passcheck.touched" class="alert">
+                        <div *ngIf="passcheck.errors?.['required']">Password is required !</div>
+                        <div *ngIf="passcheck.errors?.['minlength']">Password must be at least 8 chars long !</div>
+                        <div *ngIf="passcheck.errors?.['maxlength']">Password can't exceed 20 chars !</div>
+                    </div>
+                </div>
+                <button class="btn" type="submit">Sign Up</button>
+                <p>Already have an account? <a routerLink="/login">Login</a></p>
+            </form>
+        </div>
+    </div>
+</body>

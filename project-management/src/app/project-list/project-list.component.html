@@ -1,4 +1,25 @@
 <!-- <p>project-list works!</p> -->
+<main>
+  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">TeamSync</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link"mat-icon-button (click)="openTimeZoneConverter()">
+              <mat-icon>access_time</mat-icon>
+            </a>
+            <a class="nav-link" routerLink="/">Home</a>
+            <a class="nav-link" (click)="logOut()" style="cursor: pointer;">Log Out</a>
+          </div>
+        </div>
+      </div>
+  </nav>
+
+
+
 <div class="project-list-container">
   <div class="main-content">
     <div *ngIf="projects.length > 0; else noProjects">
@@ -10,7 +31,7 @@
           <button class="close-button" (click)="closeCreateProject()">X</button>
         </div>
       </ng-container>
-      <ul>
+      <ul style="list-style-type: none; margin-top: 15px;">
         <li *ngFor="let project of projects" class="project-list-item" (click)="viewProjectDetails(project.id)">
           <p>{{ project.id }}</p>
           <h2 style="cursor: pointer;">{{ project.name }}</h2>
@@ -28,16 +49,19 @@
         </li>
       </ul>
       <!-- <router-outlet></router-outlet> -->
+       
     </div>
+    
     <ng-template #noProjects>
       <p>No projects available.</p>
     </ng-template>
+    
   </div>
-  <div class="notification-space">
+  <!-- <div class="notification-space">
     <h3>Notifications <mat-icon>notifications</mat-icon>
     </h3>
     <ul>
       <li *ngFor="let notification of notifications">{{ notification }} </li>
     </ul>
-  </div>
+  </div> -->
 </div>

@@ -1,20 +1,5 @@
-<!-- <p>project-create works!</p>
-<form (ngSubmit)="onSubmit()" #projectForm="ngForm">
-    <div>
-      <label for="name">Project Name:</label>
-      <input type="text" id="name" name="name" [(ngModel)]="project.name" required>
-    </div>
-    <div>
-      <label for="description">Description:</label>
-      <textarea id="description" name="description" [(ngModel)]="project.description" required></textarea>
-    </div>
-    <div>
-      <label for="leadId">Lead ID:</label>
-      <input type="number" id="leadId" name="leadId" [(ngModel)]="project.leadId" required>
-    </div>
-    <button type="submit">Create Project</button>
-  </form>
-   -->
+
+  <div class="form-container">
    <form (ngSubmit)="onSubmit(projectForm)" #projectForm="ngForm">
     <div>
       <label for="name">Project Name:</label>
@@ -43,6 +28,7 @@
   
     <button type="submit" [disabled]="projectForm.invalid">Create Project</button>
   </form>
+  </div>
   <!-- <div>
     <label for="deadline">Deadline:</label>
     <input type="date" id="deadline" formControlName="deadline" />

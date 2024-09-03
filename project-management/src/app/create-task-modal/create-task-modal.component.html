@@ -1,97 +1,54 @@
-<h1 mat-dialog-title>Create Task</h1>
-<div mat-dialog-content>
-  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-    <div class="form-field">
-      <mat-form-field appearance="fill">
-        <mat-label>Task Name</mat-label>
-        <input matInput formControlName="name" required />
-      </mat-form-field>
-    </div>
+<div class="modal-overlay">
+  <div class="modal-container">
+    <div class="test-container">
+    <h1 class="modal-title">Create Task</h1>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="form-field">
+        <label for="name">Task Name</label>
+        <input id="name" type="text" formControlName="name" required />
+      </div>
 
-    <div class="form-field">
-      <mat-form-field appearance="fill">
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" rows="4"></textarea>
-      </mat-form-field>
-    </div>
+      <div class="form-field">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" rows="4"></textarea>
+      </div>
 
-    <div class="form-field">
-      <mat-form-field appearance="fill">
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="status">
-          <mat-option value="TODO">TODO</mat-option>
-          <mat-option value="ONGOING">ONGOING</mat-option>
-          <mat-option value="TESTING">TESTING</mat-option>
-          <mat-option value="COMPLETED">COMPLETED</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+      <div class="form-field">
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+          <option value="TODO">TODO</option>
+          <option value="ONGOING">ONGOING</option>
+          <option value="TESTING">TESTING</option>
+          <option value="COMPLETED">COMPLETED</option>
+        </select>
+      </div>
 
-    <div class="form-field">
-      <mat-form-field appearance="fill">
-        <mat-label>Progress</mat-label>
-        <mat-select formControlName="progress" required>
-          <mat-option *ngFor="let progress of progressOptions" [value]="progress">
-            {{ progress }}%
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+      <div class="form-field">
+        <label for="progress">Progress</label>
+        <select id="progress" formControlName="progress" required>
+          <option *ngFor="let progress of progressOptions" [value]="progress">{{ progress }}%</option>
+        </select>
+      </div>
 
-    <div class="form-field">
-      <mat-form-field appearance="fill">
-        <mat-label>Project</mat-label>
-        <mat-select formControlName="projectId">
-          <mat-option *ngFor="let project of projects" [value]="project.id">
+      <div class="form-field">
+        <label for="project">Project</label>
+        <select id="project" formControlName="projectId" required>
+          <option *ngFor="let project of projects" [value]="project.id">
             {{ project.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <!-- <div class="form-field">
-      <mat-form-field appearance="fill">
-        <mat-label>Project</mat-label>
-        <mat-select formControlName="projectId">
-          <mat-option *ngFor="let project of projects" [value]="project.id">
-            {{ project.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div> -->
+          </option>
+        </select>
+      </div>
 
-    <!-- <mat-form-field appearance="fill">
-      <label>Created Date</label>
-      <input matInput type="date" formControlName="createdDate" required />
-    </mat-form-field> -->
+      <div class="form-field">
+        <label for="date">Choose a date</label>
+        <input id="date" type="date" formControlName="deadline" />
+      </div>
 
-    <!-- <mat-form-field appearance="fill">
-      <label>Deadline</label>
-      <input matInput type="date" formControlName="deadline" required />
-      <mat-datepicker #myDatepicker></mat-datepicker>
-    </mat-form-field> -->
-    <mat-form-field>
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    
-
-    <!-- <div>
-      <mat-form-field appearence="fill">
-        <label for="deadline">Deadline:</label>
-        <input matInput type="date" id="deadline" formControlName="deadline" />
-<div *ngIf="projectForm.get('deadline')?.invalid && projectForm.get('deadline')?.touched">
-      <small *ngIf="projectForm.get('deadline')?.errors?.['required']">Deadline is required.</small>
-    </div> -->
-    <!-- </mat-form-field> -->
-    <!-- </div> --> 
-
-
-    <div class="button-container">
-      <button mat-raised-button color="primary" type="submit">Create</button>
-      <button mat-button type="button" (click)="closeModal()">Cancel</button>
-    </div>
-  </form>
+      <div class="button-container">
+        <button type="submit" class="submit-button">Create</button>
+        <button type="button" class="cancel-button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  </div>
 </div>

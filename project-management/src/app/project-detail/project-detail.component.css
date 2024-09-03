@@ -1,197 +1,219 @@
-/* src/app/components/project-details/project-details.component.css
+/* src/app/components/project-details/project-details.component.css */
 .project-details {
-    padding: 20px;
-  }
-  
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.task-item {
+  margin-bottom: 20px;
+}
+
+.task-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: #f44336;
+  font-size: 1.2em;
+}
+
+.task-progress {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.progress-circle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.progress-circle svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.progress-bg {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 4;
+}
+
+.progress-bar {
+  fill: none;
+  stroke: #4caf50;
+  stroke-width: 4;
+}
+
+.progress-circle span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deadline {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.update-button {
+  background-color: #ff4081;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.update-button:hover {
+  background-color: #e91e63;
+}
+
+.kanban-board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.kanban-column {
+  flex: 1;
+  margin: 10px;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  min-width: 250px;
+}
+
+.kanban-column h3 {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.task-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-card h4 {
+  margin-top: 0;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: #f44336;
+  font-size: 1.2em;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.add-task {
+  margin-left: 20px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
   .kanban-board {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
   }
-  
+
   .kanban-column {
-    flex: 1;
-    margin: 0 10px;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  .kanban-task {
-    background-color: white;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-   */
-   /* src/app/components/project-details/project-details.component.css */
-.project-details {
-    padding: 20px;
-  }
-  
-  h2 {
-    font-size: 24px;
-  }
-  
-  h3 {
-    font-size: 20px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 10px;
-  }
-  
-  .task-item {
+    min-width: 100%;
     margin-bottom: 20px;
   }
-  
-  .task-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .task-name {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .delete-icon {
-    cursor: pointer;
-    color: #f44336;
-    font-size: 1.2em;
-  }
-  
-  .task-progress {
-    display: flex;
-    align-items: center;
-    margin: 15px 0;
-  }
-  
-  .progress-circle {
-    position: relative;
-    width: 40px;
-    height: 40px;
-  }
-  
-  .progress-circle svg {
-    transform: rotate(-90deg);
-    width: 100%;
-    height: 100%;
-  }
-  
-  .progress-bg {
-    fill: none;
-    stroke: #ddd;
-    stroke-width: 4;
-  }
-  
-  .progress-bar {
-    fill: none;
-    stroke: #4caf50;
-    stroke-width: 4;
-  }
-  
-  .progress-circle span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.8em;
-    font-weight: bold;
-  }
-  
+
   .task-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .deadline {
-    font-size: 0.9em;
-    color: #777;
-  }
-  
+
   .update-button {
-    background-color: #ff4081;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
   }
-  
-  .update-button:hover {
-    background-color: #e91e63;
-  }
-  
-  .kanban-board {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px;
-  }
-  
-  .kanban-column {
-    flex: 1;
-    margin: 0 10px;
-    background-color: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .kanban-column h3 {
+  .navbar .navbar-brand, .navbar .nav-item {
+    width: 100%;
     text-align: center;
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    margin: 10px 0;
   }
-  
-  .task-card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  .navbar .add-task {
+    width: 100%;
   }
-  
-  .task-card h4 {
-    margin-top: 0;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .delete-icon {
-    cursor: pointer;
-    color: #f44336;
-    font-size: 1.2em;
-  }
-  
+}
+
+/* .delete-icon {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  cursor: pointer;
+  color: red;
+} */
