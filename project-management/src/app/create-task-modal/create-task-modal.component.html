@@ -1,54 +1,59 @@
 <div class="modal-overlay">
   <div class="modal-container">
     <div class="test-container">
-    <h1 class="modal-title">Create Task</h1>
-    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-      <div class="form-field">
-        <label for="name">Task Name</label>
-        <input id="name" type="text" formControlName="name" required />
-      </div>
+      <h1 class="modal-title">Create Task</h1>
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+          <label for="name">Task Name</label>
+          <input id="name" type="text" formControlName="name" required />
+        </div>
 
-      <div class="form-field">
-        <label for="description">Description</label>
-        <textarea id="description" formControlName="description" rows="4"></textarea>
-      </div>
+        <div class="form-field">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description" rows="4"></textarea>
+        </div>
 
-      <div class="form-field">
-        <label for="status">Status</label>
-        <select id="status" formControlName="status">
-          <option value="TODO">TODO</option>
-          <option value="ONGOING">ONGOING</option>
-          <option value="TESTING">TESTING</option>
-          <option value="COMPLETED">COMPLETED</option>
-        </select>
-      </div>
+        <div class="form-field">
+          <label for="status">Status</label>
+          <select id="status" formControlName="status">
+            <option value="TODO">TODO</option>
+            <option value="ONGOING">ONGOING</option>
+            <option value="TESTING">TESTING</option>
+            <option value="COMPLETED">COMPLETED</option>
+          </select>
+        </div>
 
-      <div class="form-field">
-        <label for="progress">Progress</label>
-        <select id="progress" formControlName="progress" required>
-          <option *ngFor="let progress of progressOptions" [value]="progress">{{ progress }}%</option>
-        </select>
-      </div>
+        <div class="form-field">
+          <label for="progress">Progress</label>
+          <select id="progress" formControlName="progress" required>
+            <option *ngFor="let progress of progressOptions" [value]="progress">{{ progress }}%</option>
+          </select>
+        </div>
 
-      <div class="form-field">
-        <label for="project">Project</label>
-        <select id="project" formControlName="projectId" required>
-          <option *ngFor="let project of projects" [value]="project.id">
-            {{ project.name }}
-          </option>
-        </select>
-      </div>
+        <div class="form-field">
+          <label for="project">Project</label>
+          <select id="project" formControlName="projectId" required>
+            <option *ngFor="let project of projects" [value]="project.id">
+              {{ project.name }}
+            </option>
+          </select>
+        </div>
 
-      <div class="form-field">
-        <label for="date">Choose a date</label>
-        <input id="date" type="date" formControlName="deadline" />
-      </div>
+        <div class="form-field">
+          <label for="date">Choose a date</label>
+          <input id="date" type="date" formControlName="deadline" />
+        </div>
 
-      <div class="button-container">
-        <button type="submit" class="submit-button">Create</button>
-        <button type="button" class="cancel-button" (click)="closeModal()">Cancel</button>
-      </div>
-    </form>
-  </div>
+        <div class="form-field">
+          <label for="assignedTo">Assign To</label>
+          <input id="assignedTo" type="text" formControlName="assignedTo" placeholder="Enter username" />
+        </div>
+
+        <div class="button-container">
+          <button type="submit" class="submit-button">Create</button>
+          <button type="button" class="cancel-button" (click)="closeModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

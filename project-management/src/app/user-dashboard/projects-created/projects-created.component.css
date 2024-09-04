@@ -1,0 +1,71 @@
+.dashboard-container {
+    display: flex;
+  }
+  
+  .sidenav {
+    width: 20%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 2px solid #ddd;
+  }
+  
+  .content {
+    width: 80%;
+    padding: 20px;
+  }
+  
+  .projects-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+  }
+  
+  .project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .project-item {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+  }
+  
+  .project-item:hover {
+    transform: translateY(-5px);
+    background-color: #f8f9fa;
+  }
+  
+  .project-item h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #007bff;
+  }
+  
+  .status {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .status.TODO {
+    color: #ffc107;
+  }
+  
+  .status.ONGOING {
+    color: #17a2b8;
+  }
+  
+  .status.TESTING {
+    color: #fd7e14;
+  }
+  
+  .status.COMPLETED {
+    color: #28a745;
+  }
+  

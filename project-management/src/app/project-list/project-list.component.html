@@ -22,15 +22,16 @@
 
 <div class="project-list-container">
   <div class="main-content">
+    <button mat-raised-button (click)="openCreateProject()" class="create-project">Create Project</button>
+    <ng-container *ngIf="isModalOpen">
+      <div class="modal-backdrop" (click)="closeCreateProject()"></div>
+      <div class="modal-content">
+        <app-project-create></app-project-create>
+        <button class="close-button" (click)="closeCreateProject()">X</button>
+      </div>
+    </ng-container>
     <div *ngIf="projects.length > 0; else noProjects">
-      <button mat-raised-button (click)="openCreateProject()" class="create-project">Create Project</button>
-      <ng-container *ngIf="isModalOpen">
-        <div class="modal-backdrop" (click)="closeCreateProject()"></div>
-        <div class="modal-content">
-          <app-project-create></app-project-create>
-          <button class="close-button" (click)="closeCreateProject()">X</button>
-        </div>
-      </ng-container>
+      
       <ul style="list-style-type: none; margin-top: 15px;">
         <li *ngFor="let project of projects" class="project-list-item" (click)="viewProjectDetails(project.id)">
           <p>{{ project.id }}</p>

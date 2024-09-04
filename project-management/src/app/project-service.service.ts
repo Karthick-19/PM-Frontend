@@ -15,15 +15,33 @@ export class ProjectServiceService {
 
 
   constructor(private http: HttpClient) {
-    this.getAllProjects();
+    this.fetchProjects();
   }
 
 
+  // private fetchProjects(): void {
+  //   this.http.get<Project[]>(this.baseUrl).subscribe(projects => {
+  //     this.projectsSubject.next(projects);
+  //   });
+  // }
   private fetchProjects(): void {
-    this.http.get<Project[]>(this.baseUrl).subscribe(projects => {
-      this.projectsSubject.next(projects);
-    });
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      const userIdNumber = Number(userId);
+      this.getProjectsByUserId(userIdNumber).subscribe(projects => {
+        this.projectsSubject.next(projects);
+      });
+    }
   }
+
+  
+  
+  createProject(project: Project): Observable<Project> {
+    return this.http.post<Project>(this.baseUrl, project).pipe(
+      tap(() => this.fetchProjects())  // Fetch the updated list for the specific user
+    );
+  }
+  
   getAllProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.baseUrl);
   }
@@ -32,9 +50,9 @@ export class ProjectServiceService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(this.baseUrl, project).pipe(tap(() => this.fetchProjects())); 
-  }
+  // createProject(project: Project): Observable<Project> {
+  //   return this.http.post<Project>(this.baseUrl, project).pipe(tap(() => this.fetchProjects())); 
+  // }
 
   getProjectById(projectId: number): Observable<Project> {
     const url = `${this.baseUrl}/${projectId}`;
@@ -83,5 +101,11 @@ export class ProjectServiceService {
   // }
   getProjectsByUserId(userId: number): Observable<Project[]> {
     return this.http.get<Project[]>(`${this.baseUrl}/user/${userId}`);
+  }
+
+  private TUrl = 'http://localhost:7001/projects/assigned/';
+
+  getAssignedTasks(username: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.TUrl}${username}`);
   }
 }

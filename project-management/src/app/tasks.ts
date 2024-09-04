@@ -8,6 +8,8 @@ export class Task {
     createdDate!: string;
     deadline!: string;
     projectId!: number; // Or link to the project model if needed
+    assignedTo!: string;  // Add this field for task assignment
+    projectName!:string
   }
 
   // tasks.ts or task-status.ts (wherever appropriate)

@@ -55,7 +55,8 @@ export class CreateTaskModalComponent {
       progress: [0, Validators.required],
       projectId: [data.projectId, Validators.required],
       createdDate: [new Date(), Validators.required],
-      deadline: [new Date(), Validators.required]
+      deadline: [new Date(), Validators.required],
+      assignedTo:['',Validators.required]
     });
 
     // Fetch projects when component initializes
@@ -76,6 +77,7 @@ export class CreateTaskModalComponent {
       if (selectedProject) {
         const task = {
           ...this.taskForm.value,
+          projectName:selectedProject.name,
           project: selectedProject
         };
   
@@ -91,10 +93,9 @@ export class CreateTaskModalComponent {
       } else {
         console.error('Selected project not found');
       }
-
     }
-    // this.getProjectDetails(this.data.projectId); 
   }  
+ 
 
   closeModal(): void {
     this.dialogRef.close();

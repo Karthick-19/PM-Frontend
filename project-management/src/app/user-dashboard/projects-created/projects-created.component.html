@@ -1,0 +1,15 @@
+<div class="projects-created-section">
+    <h3>Projects I Created</h3>
+    <div class="projects-list">
+      <div class="project-card" *ngFor="let project of createdProjects" (click)="navigateToProject(project.id)">
+        <h4>{{ project.name }}</h4>
+        <ul>
+          <li *ngFor="let task of project.tasks">
+            <span class="task-name">{{ task.name }}</span>
+            <span class="task-status">{{ task.status }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

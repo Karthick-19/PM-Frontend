@@ -30,6 +30,8 @@
           <p>Status: {{ task.status }}</p>
           <p>Progress: {{ task.progress }}%</p>
           <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
+          <p>Assigned To: {{ task.assignedTo }}</p>
+          <!-- <p>Project name: {{task.projectId}}</p> -->
           <button (click)="openUpdateTaskModal(task)">Update</button>
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>
@@ -42,6 +44,8 @@
           <p>Status: {{ task.status }}</p>
           <p>Progress: {{ task.progress }}%</p>
           <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
+          <p>Assigned To: {{ task.assignedTo }}</p>
+
           <button (click)="openUpdateTaskModal(task)">Update</button>
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>
@@ -54,6 +58,8 @@
           <p>Status: {{ task.status }}</p>
           <p>Progress: {{ task.progress }}%</p>
           <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
+          <p>Assigned To: {{ task.assignedTo }}</p>
+
           <button (click)="openUpdateTaskModal(task)">Update</button>
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>
@@ -66,6 +72,8 @@
           <p>Status: {{ task.status }}</p>
           <p>Progress: {{ task.progress }}%</p>
           <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
+          <p>Assigned To: {{ task.assignedTo }}</p>
+
           <button (click)="openUpdateTaskModal(task)">Update</button>
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>

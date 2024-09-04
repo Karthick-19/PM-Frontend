@@ -30,15 +30,27 @@ export class ProjectCreateComponent {
       this.projectService.createProject(this.project).subscribe(
         response => {
           console.log('Project created successfully', response);
-          this.projectService.addProject(response); // Update the project list in the service
+          
+          // Update the project list in the service
+          // This ensures that the list reflects the newly created project
+          this.projectService.addProject(response);
+    
+          // Set a flag to show success message or update UI
           this.isProjectCreated = true;
-          form.resetForm();  // Reset the form after successful creation
-          setTimeout(() => this.isProjectCreated = false, 3000); // Hide the popup after 3 seconds
-          this.router.navigate(['/projects']);  // Navigate to the project list
+    
+          // Reset the form after successful creation
+          form.resetForm();
+    
+          // Hide the popup after 3 seconds
+          setTimeout(() => this.isProjectCreated = false, 3000);
+    
+          // Navigate to the project list
+          this.router.navigate(['/projects']);
         },
         error => {
           console.error('Error creating project', error);
+          // Optionally, display an error message to the user here
         }
       );
     }
-}
+  }
