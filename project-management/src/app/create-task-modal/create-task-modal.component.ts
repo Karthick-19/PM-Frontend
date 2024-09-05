@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -13,6 +13,9 @@ import { TaskService } from '../task.service';
 import { ProjectServiceService } from '../project-service.service';
 import { Task } from '../tasks';
 import { Project } from '../project';
+import { MailService } from '../mail.service';
+import { Mail } from '../Mail';
+import { SecurityService } from '../security.service';
 
 
 
@@ -34,7 +37,7 @@ import { Project } from '../project';
   templateUrl: './create-task-modal.component.html',
   styleUrls: ['./create-task-modal.component.css']
 })
-export class CreateTaskModalComponent {
+export class CreateTaskModalComponent implements OnInit{
   taskForm: FormGroup;
   projects: any[] = []; // List of projects
   project!: Project;
@@ -47,7 +50,10 @@ export class CreateTaskModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private taskService: TaskService,
     private projectService: ProjectServiceService // Inject the ProjectService
+    ,private mailService: MailService,
+    private securityService: SecurityService
   ) {
+    
     this.taskForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -56,7 +62,7 @@ export class CreateTaskModalComponent {
       projectId: [data.projectId, Validators.required],
       createdDate: [new Date(), Validators.required],
       deadline: [new Date(), Validators.required],
-      assignedTo:['',Validators.required]
+      assignedTo:[[''],Validators.required]
     });
 
     // Fetch projects when component initializes
@@ -64,11 +70,17 @@ export class CreateTaskModalComponent {
       this.projects = projects;
     });
   }
+  users: any[] = [];
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
   getProjectDetails(projectId: number): void {
     this.projectService.getProjectById(projectId).subscribe(data => {
       this.project = data;
     });
   }
+  newMail: Mail = new Mail("","","");
   onSubmit(): void {
     if (this.taskForm.valid) {
       const projectId = this.taskForm.value.projectId;
@@ -80,11 +92,45 @@ export class CreateTaskModalComponent {
           projectName:selectedProject.name,
           project: selectedProject
         };
-  
+        
         this.taskService.createTask(task).subscribe(
           response => {
             console.log('Task created successfully', response);
-            this.dialogRef.close(response);  // Pass the response (or true) to indicate success
+            this.dialogRef.close(response);  
+            this.newMail = {
+              email: task.assignedTo, 
+              subject: 'Task Allocated',
+              message: `
+                Hello,
+
+                A new task has been assigned to you.
+
+                Task Details:
+               
+                - Name: ${task.name}
+                - Description: ${task.description}
+                - Status: ${task.status}
+                - Progress: ${task.progress}%
+                - Deadline: ${task.deadline}
+                - Project: ${task.project.name}
+
+                Please make sure to complete it before the deadline.
+
+                Best regards,
+                Project Management Team
+              `
+            };
+            
+            this.mailService.sendMail(this.newMail).subscribe(
+              mailResponse => {
+                console.log('Mail sent successfully', mailResponse);
+                this.dialogRef.close(response);  // Close the dialog
+              },
+              mailError => {
+                console.error('Error sending mail', mailError);
+              }
+            );
+
           },
           error => {
             console.error('Error creating task', error);
@@ -95,6 +141,22 @@ export class CreateTaskModalComponent {
       }
     }
   }  
+ 
+  loadUsers(): void {
+    const organization = localStorage.getItem('uorg'); 
+    const loggedInUsername = localStorage.getItem('username');  // Get logged-in user's username
+    if (organization) {
+      this.securityService.getUsersByOrganization(organization).subscribe({
+        next: (data) => {
+          this.users = data;
+          this.users = data.filter(user => user.username !== loggedInUsername);
+        },
+        error: (error) => {
+          console.error('Error fetching users:', error);
+        }
+      });
+    }
+  }
  
 
   closeModal(): void {

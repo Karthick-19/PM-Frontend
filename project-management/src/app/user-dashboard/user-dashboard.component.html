@@ -5,8 +5,8 @@
         <div class="navbar-links">
             <a href="#">Home</a>
             <a href="#">Notifications</a>
-            <a href="#">Messages</a>
-            <a href="#">Help</a>
+            <a routerLink="/mailbox">Mail</a>
+            <a (click)="logout()" style="cursor: pointer;">Logout</a>
         </div>
     </nav>
 
@@ -26,7 +26,7 @@
         <main class="main-content">
             <!-- User Info -->
             <div class="user-info">
-                <h2>Welcome, {{ username }}</h2>
+                <h2>Welcome, {{ username }} {{organization}}</h2>
             </div> 
 
             <!-- Projects and Tasks Sections -->

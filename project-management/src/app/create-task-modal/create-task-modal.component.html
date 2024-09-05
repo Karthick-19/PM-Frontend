@@ -46,7 +46,11 @@
 
         <div class="form-field">
           <label for="assignedTo">Assign To</label>
-          <input id="assignedTo" type="text" formControlName="assignedTo" placeholder="Enter username" />
+          <select id="assignedTo" formControlName="assignedTo">
+            <option *ngFor="let user of users" [value]="user.username">
+              {{ user.username }}
+            </option>
+          </select>
         </div>
 
         <div class="button-container">

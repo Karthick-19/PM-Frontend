@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProjectServiceService } from '../project-service.service';
 import { Project } from '../project';
 import { CommonModule } from '@angular/common';
@@ -9,10 +9,11 @@ import { Task } from '../tasks';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
 import { TaskService } from '../task.service';
+import { SecurityService } from '../security.service';
 
 @Component({
-  standalone:true,
-  imports:[CommonModule,FormsModule,ProjectsCreatedComponent],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ProjectsCreatedComponent, RouterLink],
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
@@ -23,16 +24,19 @@ export class UserDashboardComponent implements OnInit {
   assignedTasks: Task[] = [];
 
   username: string = '';
+  organization: string = '';
 
 
   constructor(private projectService: ProjectServiceService, private router: Router
-    , public dialog: MatDialog,private taskService: TaskService
-  ) {    this.username = localStorage.getItem('uname') || 'User';
+    , public dialog: MatDialog, private taskService: TaskService, private securityService: SecurityService
+  ) {
+    this.username = localStorage.getItem('uname') || 'User';
+    this.organization = localStorage.getItem('uorg') || 'Organization'
   }
 
   ngOnInit(): void {
     const userId = Number(localStorage.getItem('userId'));
-    
+
     // Fetch projects I created
     this.projectService.getProjectsByUserId(userId).subscribe(projects => {
       this.createdProjects = projects;
@@ -77,22 +81,27 @@ export class UserDashboardComponent implements OnInit {
       data: { task: task }
     });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //   //   if (result) {
-  //   //     // Refresh the assigned tasks after update
-  //   //     this.fetchAssignedTasks();
-  //   //   }
-  //   // });
-  // }
-  // fetchAssignedTasks(): void {
-  //   const username = 'your-username'; // Replace with actual username retrieval logic
-  //   this.taskService.getTasksByAssignedUser(username).subscribe((tasks: Task[]) => {
-  //     this.assignedTasks = tasks;
-  //   });
-  // }
+    //   dialogRef.afterClosed().subscribe(result => {
+    //   //   if (result) {
+    //   //     // Refresh the assigned tasks after update
+    //   //     this.fetchAssignedTasks();
+    //   //   }
+    //   // });
+    // }
+    // fetchAssignedTasks(): void {
+    //   const username = 'your-username'; // Replace with actual username retrieval logic
+    //   this.taskService.getTasksByAssignedUser(username).subscribe((tasks: Task[]) => {
+    //     this.assignedTasks = tasks;
+    //   });
+    // }
   }
-//   toggleSidebar(): void {
-//     const sidenav = document.querySelector('.sidenav');
-//     sidenav.classList.toggle('collapsed');
-// }
+  //   toggleSidebar(): void {
+  //     const sidenav = document.querySelector('.sidenav');
+  //     sidenav.classList.toggle('collapsed');
+  // }
+  logout() {
+    this.securityService.signOut()
+  }
+
+
 }

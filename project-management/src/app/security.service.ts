@@ -17,7 +17,7 @@ export class SecurityService {
 
   jwt: string = "";
 
-  currentUser: UserRegister = new UserRegister(0,"","","");
+  currentUser: UserRegister = new UserRegister(0,"","","","","");
 
   register(newUser: UserRegister): Observable<UserRegister>{
     return this.http.post<UserRegister>(`${this.url}/register`, newUser);
@@ -54,6 +54,11 @@ export class SecurityService {
   signOut(){
     localStorage.removeItem('token');
     this.router.navigate(['/']);
+  }
+
+  private apiUrl = "http://localhost:7050"
+  getUsersByOrganization(organization: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/organization/${organization}`);
   }
 
 }

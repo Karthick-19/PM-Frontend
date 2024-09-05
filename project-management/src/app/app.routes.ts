@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { authGuard } from './auth.guard';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { MailService } from './mail.service';
+import { MailBoxComponent } from './mailbox/mailbox.component';
 // import { CreateTaskComponent } from './create-task/create-task.component';
 
 export const routes: Routes =
@@ -20,6 +22,7 @@ export const routes: Routes =
     {path:'login', component: LoginComponent},
     {path:'signup', component: SignupComponent},
     { path: 'dashboard', component: UserDashboardComponent },
+    {path:'mailbox',component:MailBoxComponent}
     // { path: '**', redirectTo: '/projects' },
     
   ];

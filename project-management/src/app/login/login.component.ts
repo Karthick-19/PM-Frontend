@@ -4,6 +4,7 @@ import { SecurityService } from '../security.service';
 import { UserLogin } from '../UserLogin';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { MailService } from '../mail.service';
  
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { NgIf } from '@angular/common';
 })
 export class LoginComponent {
  
-  constructor(private securityService: SecurityService){};
+  constructor(private securityService: SecurityService,private mailService:MailService){};
  
   user: UserLogin = new UserLogin("","");
  
@@ -54,6 +55,7 @@ export class LoginComponent {
       next: (data) => {
         localStorage.setItem('token', data);
         this.securityService.jwt = data;
+        this.mailService.jwt = data
         this.securityService.getLoggedinUser(this.user).subscribe({
           next: (data) => {
             this.securityService.currentUser = data;
@@ -61,6 +63,7 @@ export class LoginComponent {
             localStorage.setItem('userId', data.id.toString()); // Store the user ID
             localStorage.setItem('uname', data.name); // Store the user ID
             localStorage.setItem('username',data.username)
+            localStorage.setItem('uorg',data.organization)
             this.router.navigate(['/dashboard']); // Redirect to the dashboard
           },
           error: (error) => { console.error(error); }

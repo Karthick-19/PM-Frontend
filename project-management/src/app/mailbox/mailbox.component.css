@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    line-height: normal;
+    /* background-color: #f2f2f2; */
+  }
+  
+  /* Background image container */
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/home-bg.jpg'); /* Replace with your actual image URL */
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* Blur effect */
+  }
+  
+  /* Overlay to dim the background image */
+  body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay to dim the background */
+  }
+
+  .contain {
+    display: flex;
+    flex-direction: column; /* Change to column to stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    height: 85%; /* Adjust height as needed */
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    margin: 20px auto; /* Add margin-top to create space */
+    backdrop-filter: none; /* Prevent blurring */
+    z-index: 100; /* Ensure card is above overlay */
+  }
+
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+
+
+.contain{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 91%
+}
+
+.data>p{
+    padding: 15px;
+}
