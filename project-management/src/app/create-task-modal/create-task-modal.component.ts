@@ -89,22 +89,24 @@ export class CreateTaskModalComponent implements OnInit{
       if (selectedProject) {
         const task = {
           ...this.taskForm.value,
-          projectName:selectedProject.name,
+          projectName: selectedProject.name,
           project: selectedProject
         };
         
         this.taskService.createTask(task).subscribe(
           response => {
             console.log('Task created successfully', response);
-            this.dialogRef.close(response);  
+            this.dialogRef.close(response);  // Close and pass the response (new task)
+            
+            // Send mail notification
             this.newMail = {
               email: task.assignedTo, 
               subject: 'Task Allocated',
               message: `
                 Hello,
-
+  
                 A new task has been assigned to you.
-
+  
                 Task Details:
                
                 - Name: ${task.name}
@@ -113,9 +115,9 @@ export class CreateTaskModalComponent implements OnInit{
                 - Progress: ${task.progress}%
                 - Deadline: ${task.deadline}
                 - Project: ${task.project.name}
-
+  
                 Please make sure to complete it before the deadline.
-
+  
                 Best regards,
                 Project Management Team
               `
@@ -124,13 +126,11 @@ export class CreateTaskModalComponent implements OnInit{
             this.mailService.sendMail(this.newMail).subscribe(
               mailResponse => {
                 console.log('Mail sent successfully', mailResponse);
-                this.dialogRef.close(response);  // Close the dialog
               },
               mailError => {
                 console.error('Error sending mail', mailError);
               }
             );
-
           },
           error => {
             console.error('Error creating task', error);
@@ -140,7 +140,8 @@ export class CreateTaskModalComponent implements OnInit{
         console.error('Selected project not found');
       }
     }
-  }  
+  }
+   
  
   loadUsers(): void {
     const organization = localStorage.getItem('uorg'); 

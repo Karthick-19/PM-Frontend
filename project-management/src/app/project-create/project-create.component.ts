@@ -16,6 +16,7 @@ export class ProjectCreateComponent {
 
   project: Project = new Project();
   isProjectCreated = false;
+  createdProjects: Project[] = [];
 
   constructor(private projectService: ProjectServiceService,
     private router:Router
@@ -45,12 +46,17 @@ export class ProjectCreateComponent {
           setTimeout(() => this.isProjectCreated = false, 3000);
     
           // Navigate to the project list
-          this.router.navigate(['/projects']);
+          // this.router.navigate(['/projects']);
         },
         error => {
           console.error('Error creating project', error);
           // Optionally, display an error message to the user here
         }
       );
+      // const userId = Number(localStorage.getItem('userId'));
+
+      // this.projectService.getProjectsByUserId(userId).subscribe(projects => {
+      //   this.createdProjects = projects;
+      // });
     }
   }

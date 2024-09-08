@@ -42,14 +42,16 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   openCreateTaskModal(): void {
-    // const dialogRef = this.dialog.open(CreateTaskModalComponent);
     const dialogRef = this.dialog.open(CreateTaskModalComponent, {
-      data: { projectId: this.project.id } // Pass the project ID here
+      data: { projectId: this.project.id }
     });
-
+  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.taskService.getTasksByProject(this.project.id);  // Refresh the tasks list
+        // Add the newly created task to the tasks array
+        this.tasks.push(result);
+        console.log('Task list updated with new task');
+        this.getProjectDetails(this.project.id)
       }
     });
   }

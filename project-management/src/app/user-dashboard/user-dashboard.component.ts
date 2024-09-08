@@ -10,10 +10,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
 import { TaskService } from '../task.service';
 import { SecurityService } from '../security.service';
+import { ProjectCreateComponent } from '../project-create/project-create.component';
+import { ATask } from '../ATask';
+// import { WebSocketService } from '../websocket.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, ProjectsCreatedComponent, RouterLink],
+  imports: [CommonModule, FormsModule, ProjectsCreatedComponent, RouterLink, ProjectCreateComponent],
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
@@ -21,14 +24,20 @@ import { SecurityService } from '../security.service';
 export class UserDashboardComponent implements OnInit {
   recentProjects: Project[] = [];
   createdProjects: Project[] = [];
-  assignedTasks: Task[] = [];
+  assignedTasks: ATask[] = [];
+  
+  showCalendar: boolean = false;
 
   username: string = '';
   organization: string = '';
 
+  tasks: any[] = [];
+  completions: any[] = [];
+
 
   constructor(private projectService: ProjectServiceService, private router: Router
-    , public dialog: MatDialog, private taskService: TaskService, private securityService: SecurityService
+    , public dialog: MatDialog, private securityService: SecurityService,
+    // private webSocketService: WebSocketService
   ) {
     this.username = localStorage.getItem('uname') || 'User';
     this.organization = localStorage.getItem('uorg') || 'Organization'
@@ -37,25 +46,30 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit(): void {
     const userId = Number(localStorage.getItem('userId'));
 
-    // Fetch projects I created
     this.projectService.getProjectsByUserId(userId).subscribe(projects => {
       this.createdProjects = projects;
     });
 
-    // Fetch projects assigned to me
-    // this.projectService.getAssignedProjects(userId).subscribe(projects => {
-    //   this.assignedProjects = projects;
+    const username = localStorage.getItem('username'); // Get the username from localStorage
+    // this.webSocketService.connect();
+
+    // if(username){
+    // // Subscribe to task assignment notifications
+    // this.webSocketService.subscribeToTaskNotifications(username).subscribe((task) => {
+    //   this.tasks.push(task);
     // });
 
-    // Fetch recent projects (for example, latest 5 projects)
-    // this.projectService.getRecentProjects().subscribe(projects => {
-    //   this.recentProjects = projects.slice(0, 5);
+    // // Subscribe to task completion notifications
+    // this.webSocketService.subscribeToCompletionNotifications(username).subscribe((task) => {
+    //   this.completions.push(task);
     // });
-    const username = localStorage.getItem('username'); // Get the username from localStorage
+  // }
 
     if (username) {
       this.projectService.getAssignedTasks(username).subscribe(
+        
         (tasks) => {
+          console.log(tasks)
           this.assignedTasks = tasks;
         },
         (error) => {
@@ -63,45 +77,56 @@ export class UserDashboardComponent implements OnInit {
         }
       );
 
-      // Optionally, you can also fetch createdProjects and recentProjects here
-      // this.fetchCreatedProjects();
-      // this.fetchRecentProjects();
     } else {
       console.log('No username found in localStorage.');
     }
+    
   }
+  
 
+  signOut() {
+    this.securityService.signOut();
+  }
   navigateToProject(projectId: number): void {
     this.router.navigate(['/projects', projectId]);
   }
+
 
   openUpdateTaskModal(task: Task): void {
     const dialogRef = this.dialog.open(UpdateTaskModalComponent, {
       width: '500px',
       data: { task: task }
     });
-
-    //   dialogRef.afterClosed().subscribe(result => {
-    //   //   if (result) {
-    //   //     // Refresh the assigned tasks after update
-    //   //     this.fetchAssignedTasks();
-    //   //   }
-    //   // });
-    // }
-    // fetchAssignedTasks(): void {
-    //   const username = 'your-username'; // Replace with actual username retrieval logic
-    //   this.taskService.getTasksByAssignedUser(username).subscribe((tasks: Task[]) => {
-    //     this.assignedTasks = tasks;
-    //   });
-    // }
+    dialogRef.componentInstance.taskUpdated.subscribe(() => {
+      this.loadAssignedTasks(); // Refresh tasks after update
+    });
   }
-  //   toggleSidebar(): void {
-  //     const sidenav = document.querySelector('.sidenav');
-  //     sidenav.classList.toggle('collapsed');
-  // }
+
+  loadAssignedTasks(): void {
+    const username = localStorage.getItem('username');
+    if (username) {
+      this.projectService.getAssignedTasks(username).subscribe(
+        tasks => {
+          this.assignedTasks = tasks;
+        },
+        error => {
+          console.error('Error fetching assigned tasks:', error);
+        }
+      );
+    } else {
+      console.log('No username found in localStorage.');
+    }
+  }
+
   logout() {
     this.securityService.signOut()
   }
+  opencreateprojects() {
+    this.router.navigate(["/projects"]);
+  }
 
+  navigateToEdit() {
+    this.router.navigate(["/edit-profile"])
+  }
 
 }

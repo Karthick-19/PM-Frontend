@@ -22,7 +22,7 @@
     <h2>{{ project.name }}</h2>
     <p>{{ project.description }}</p>
     <div class="kanban-board">
-      <div class="kanban-column">
+      <div class="kanban-column todo">
         <h3>TODO</h3>
         <div *ngFor="let task of project.tasks | filterByStatus: taskStatus.TODO" class="task-card">
           <h4>{{ task.name }}</h4>
@@ -32,11 +32,11 @@
           <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
           <p>Assigned To: {{ task.assignedTo }}</p>
           <!-- <p>Project name: {{task.projectId}}</p> -->
-          <button (click)="openUpdateTaskModal(task)">Update</button>
+          <!-- <button (click)="openUpdateTaskModal(task)">Update</button> -->
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>
       </div>
-      <div class="kanban-column">
+      <div class="kanban-column ongoing">
         <h3>Ongoing</h3>
         <div *ngFor="let task of project.tasks | filterByStatus: taskStatus.ONGOING" class="task-card">
           <h4>{{ task.name }}</h4>
@@ -46,11 +46,11 @@
           <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
           <p>Assigned To: {{ task.assignedTo }}</p>
 
-          <button (click)="openUpdateTaskModal(task)">Update</button>
+          <!-- <button (click)="openUpdateTaskModal(task)">Update</button> -->
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>
       </div>
-      <div class="kanban-column">
+      <div class="kanban-column testing">
         <h3>Testing</h3>
         <div *ngFor="let task of project.tasks | filterByStatus: taskStatus.TESTING" class="task-card">
           <h4>{{ task.name }}</h4>
@@ -60,11 +60,11 @@
           <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
           <p>Assigned To: {{ task.assignedTo }}</p>
 
-          <button (click)="openUpdateTaskModal(task)">Update</button>
+          <!-- <button (click)="openUpdateTaskModal(task)">Update</button> -->
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>
       </div>
-      <div class="kanban-column">
+      <div class="kanban-column completed">
         <h3>Completed</h3>
         <div *ngFor="let task of project.tasks | filterByStatus: taskStatus.COMPLETED" class="task-card">
           <h4>{{ task.name }}</h4>
@@ -74,13 +74,14 @@
           <p>Deadline: {{ task.deadline | date: 'mediumDate' }}</p>
           <p>Assigned To: {{ task.assignedTo }}</p>
 
-          <button (click)="openUpdateTaskModal(task)">Update</button>
+          <!-- <button (click)="openUpdateTaskModal(task)">Update</button> -->
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>
       </div>
-      <button mat-button color="warn" (click)="onDeleteProject()" class="delete-button">
-        Delete Project
-      </button>
+      
     </div>
+    <button mat-button color="warn" (click)="onDeleteProject()" class="delete-button">
+      Delete Project
+    </button>
   </div>
 </div>

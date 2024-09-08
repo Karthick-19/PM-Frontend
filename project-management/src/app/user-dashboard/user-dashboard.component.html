@@ -6,8 +6,28 @@
             <a href="#">Home</a>
             <a href="#">Notifications</a>
             <a routerLink="/mailbox">Mail</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#calendarModal" style="cursor: pointer;">Calendar</a>
             <a (click)="logout()" style="cursor: pointer;">Logout</a>
         </div>
+        <!-- Calendar Modal -->
+<div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="calendarModalLabel">Google Calendar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=UTC&bgcolor=%23ffffff&src=a2NydXplMTlAZ21haWwuY29t&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043"
+              style="border:solid 1px #777" width="100%" height="500" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
     </nav>
 
     <div class="content-container">
@@ -17,8 +37,8 @@
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Settings</a></li>
-                <li><a href="#">Edit Profile</a></li>
-                <li><a href="#">Log Out</a></li>
+                <li><a (click)="navigateToEdit()" style="cursor: pointer;">Edit Profile</a></li>
+                <li><a (click)="signOut()" style="cursor: pointer;">Log Out</a></li>
             </ul>
         </nav>
 
@@ -32,7 +52,7 @@
             <!-- Projects and Tasks Sections -->
             <div class="content-sections">
                 <!-- Your Projects Section -->
-                <div class="projects-container">
+                <div class="projects-container" (click)="opencreateprojects()">
                     <h3>Your Projects</h3>
                     <div class="project-box" *ngFor="let project of createdProjects" (click)="navigateToProject(project.id)">
                         <h4>{{ project.name }}</h4>
@@ -53,9 +73,10 @@
                 <div class="tasks-container">
                     <h3>Tasks Assigned to You</h3>
                     <div *ngIf="assignedTasks.length > 0; else noAssignedTasks">
-                        <div class="task-box" *ngFor="let task of assignedTasks" (click)="navigateToProject(task.projectId)">
-                            <h4>{{ task.name }}</h4>
-                            <p>{{ task.description }}</p>
+                        <div class="task-box" *ngFor="let task of assignedTasks" >
+                            <!-- <p>{{task.taskId}}</p> -->
+                            <h4>{{ task.taskName }}</h4>
+                            <p>{{ task.taskDescription }}</p>
                             <p>Status: <span [ngClass]="{
                                 'todo': task.status === 'TODO', 
                                 'ongoing': task.status === 'ONGOING', 
@@ -65,6 +86,8 @@
                             <p>Progress: {{ task.progress }}%</p>
                             <p>Deadline: {{ task.deadline | date }}</p>
                             <p>Project Name: {{task.projectName}}</p>
+                            <p>Project Description: {{ task.projectDescription }}</p>
+                            <!-- <p>Project Leader: {{ task. }}</p> -->
                             <button (click)="openUpdateTaskModal(task)">Update Task</button>
                         </div>
                     </div>

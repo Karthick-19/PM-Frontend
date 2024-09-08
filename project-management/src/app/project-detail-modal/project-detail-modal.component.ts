@@ -88,7 +88,7 @@ export class ProjectDetailModalComponent implements OnInit {
       if (confirmed) {
         this.projectService.deleteProject(this.project.id).subscribe(() => {
           // alert('Project deleted successfully');
-          this.router.navigate(['/projects']); // Navigate to the project list or any other appropriate route
+          // this.router.navigate(['/projects']); // Navigate to the project list or any other appropriate route
         }, error => {
           console.error('Error deleting project', error);
         });

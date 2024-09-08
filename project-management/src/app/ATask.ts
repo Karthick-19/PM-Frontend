@@ -1,8 +1,11 @@
 // src/app/models/task.model.ts
-export class Task {
+export class ATask {
     id!: number;
     name!: string;
+    taskId!:number;
     description!: string;
+    taskName!: string;
+    taskDescription!: string;
     status!: TaskStatus;
     progress!: number;
     createdDate!: string;

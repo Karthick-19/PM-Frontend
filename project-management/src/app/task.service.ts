@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Task,TaskStatus } from './tasks';
+import { ATask } from './ATask';
 
 @Injectable({
   providedIn: 'root'
@@ -53,12 +54,12 @@ addTask(task: Task): void {
 }
 // localhost:7001/tasks/2/status?status=ONGOING
 private taskUrlx = "http://localhost:7001";
-updateTaskStatus(taskId: number, status: string): Observable<Task> {
-  return this.http.put<Task>(`${this.taskUrlx}/tasks/${taskId}/status`, null, { params: { status } });
+updateTaskStatus(taskId: number, status: string): Observable<ATask> {
+  return this.http.put<ATask>(`${this.taskUrlx}/tasks/${taskId}/status`, null, { params: { status } });
 }
 
 updateTaskProgress(taskId: number, progress: number): Observable<Task> {
-  return this.http.put<Task>(`${this.taskUrlx}/tasks/${taskId}/progress`, null, { params: { progress: progress.toString() } });
+  return this.http.put<ATask>(`${this.taskUrlx}/tasks/${taskId}/progress`, null, { params: { progress: progress.toString() } });
 }
 
 

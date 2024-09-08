@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA,MatDialogModule } from '@angular/material/dialog';
 import { TaskService } from '../task.service';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ATask } from '../ATask';
 
 
 @Component({
@@ -17,9 +18,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports:[FormsModule,CommonModule,MatInputModule,MatFormFieldModule,MatSelectModule,MatDialogModule]
 })
 export class UpdateTaskModalComponent {
-  task: any;
+  task: ATask;
   taskStatuses = ['TODO', 'ONGOING', 'TESTING', 'COMPLETED'];
   progressOptions = [0, 25, 50, 75, 100];
+
+  @Output() taskUpdated = new EventEmitter<void>();
+
 
   constructor(
     private dialogRef: MatDialogRef<UpdateTaskModalComponent>,
@@ -30,9 +34,10 @@ export class UpdateTaskModalComponent {
   }
 
   onUpdate(): void {
-    this.taskService.updateTaskStatus(this.task.id, this.task.status).subscribe(() => {
-      this.taskService.updateTaskProgress(this.task.id, this.task.progress).subscribe(() => {
-        this.dialogRef.close(true); // Close the modal and return success
+    this.taskService.updateTaskStatus(this.task.taskId, this.task.status).subscribe(() => {
+      this.taskService.updateTaskProgress(this.task.taskId, this.task.progress).subscribe(() => {
+        this.taskUpdated.emit(); // Emit event
+        this.dialogRef.close(); // Close the modal
       });
     });
   }

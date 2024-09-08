@@ -66,7 +66,7 @@ export class LoginComponent {
             localStorage.setItem('uorg',data.organization)
             this.router.navigate(['/dashboard']); // Redirect to the dashboard
           },
-          error: (error) => { console.error(error); }
+          error: (error: any) => { console.error(error); }
         });
       },
       error: (error) => {

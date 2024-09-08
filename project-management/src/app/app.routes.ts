@@ -21,7 +21,7 @@ export const routes: Routes =
     {path: '', component: HomeComponent},
     {path:'login', component: LoginComponent},
     {path:'signup', component: SignupComponent},
-    { path: 'dashboard', component: UserDashboardComponent },
+    { path: 'dashboard', component: UserDashboardComponent,canActivate: [authGuard] },
     {path:'mailbox',component:MailBoxComponent}
     // { path: '**', redirectTo: '/projects' },
     
