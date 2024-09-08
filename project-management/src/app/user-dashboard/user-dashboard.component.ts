@@ -13,10 +13,22 @@ import { SecurityService } from '../security.service';
 import { ProjectCreateComponent } from '../project-create/project-create.component';
 import { ATask } from '../ATask';
 // import { WebSocketService } from '../websocket.service';
+import { Chart, ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
+import {
+  PieController,
+  ArcElement,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+
+
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, ProjectsCreatedComponent, RouterLink, ProjectCreateComponent],
+  imports: [CommonModule, FormsModule, ProjectsCreatedComponent, RouterLink, ProjectCreateComponent,BaseChartDirective],
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
@@ -30,24 +42,38 @@ export class UserDashboardComponent implements OnInit {
 
   username: string = '';
   organization: string = '';
+  timeline!:string
 
   tasks: any[] = [];
   completions: any[] = [];
 
+  taskChart: any;
+  assignedTaskChart: any;
+
+  user!:any;
+  
 
   constructor(private projectService: ProjectServiceService, private router: Router
     , public dialog: MatDialog, private securityService: SecurityService,
     // private webSocketService: WebSocketService
   ) {
+    // this.securityService.getLoggedinUser(this.user).subscribe({
+    //   next: (data) => {
+    //     this.username=data.name
+    //   }})
     this.username = localStorage.getItem('uname') || 'User';
+    this.timeline = localStorage.getItem('utimeline') || 'Timeline'
     this.organization = localStorage.getItem('uorg') || 'Organization'
+    Chart.register(PieController, ArcElement, Tooltip, Legend);
   }
 
   ngOnInit(): void {
+
     const userId = Number(localStorage.getItem('userId'));
 
     this.projectService.getProjectsByUserId(userId).subscribe(projects => {
       this.createdProjects = projects;
+      this.loadTaskChart();
     });
 
     const username = localStorage.getItem('username'); // Get the username from localStorage
@@ -71,6 +97,7 @@ export class UserDashboardComponent implements OnInit {
         (tasks) => {
           console.log(tasks)
           this.assignedTasks = tasks;
+          this.loadAssignedTaskChart();
         },
         (error) => {
           console.error('Error fetching assigned tasks:', error);
@@ -82,7 +109,115 @@ export class UserDashboardComponent implements OnInit {
     }
     
   }
+
+  loadTaskChart(): void {
+    // Task status counters
+    let todoCount = 0;
+    let ongoingCount = 0;
+    let testingCount = 0;
+    let completedCount = 0;
   
+    // Loop through the projects and their tasks to count statuses
+    this.createdProjects.forEach((project) => {
+      project.tasks.forEach((task) => {
+        switch (task.status) {
+          case 'TODO':
+            todoCount++;
+            break;
+          case 'ONGOING':
+            ongoingCount++;
+            break;
+          case 'TESTING':
+            testingCount++;
+            break;
+          case 'COMPLETED':
+            completedCount++;
+            break;
+        }
+      });
+    });
+  
+    // Use the counted statuses for the chart
+    const taskStatusData = [todoCount, ongoingCount, testingCount, completedCount]; // Order: TODO, ONGOING, TESTING, COMPLETED
+    const taskLabels = ['TODO', 'ONGOING', 'TESTING', 'COMPLETED'];
+    const backgroundColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'];
+  
+    // Pie chart configuration
+    const chartConfig: ChartConfiguration<'pie'> = {
+      type: 'pie',
+      data: {
+        labels: taskLabels,
+        datasets: [{
+          data: taskStatusData,
+          backgroundColor: backgroundColors
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          }
+        }
+      }
+    };
+  
+    const canvas = <HTMLCanvasElement>document.getElementById('taskChart');
+    this.taskChart = new Chart(canvas, chartConfig);
+  }
+  
+  loadAssignedTaskChart(): void {
+        // Task status counters
+        let todoCount = 0;
+        let ongoingCount = 0;
+        let testingCount = 0;
+        let completedCount = 0;
+      
+        // Loop through the projects and their tasks to count statuses
+        this.assignedTasks.forEach((task) => {
+          // project.tasks.forEach((task) => {
+            switch (task.status) {
+              case 'TODO':
+                todoCount++;
+                break;
+              case 'ONGOING':
+                ongoingCount++;
+                break;
+              case 'TESTING':
+                testingCount++;
+                break;
+              case 'COMPLETED':
+                completedCount++;
+                break;
+            }
+          });
+        
+    const assignedTaskStatusData = [todoCount, ongoingCount, testingCount, completedCount]; // Mock data for 'Tasks Assigned to You'
+    const assignedTaskLabels = ['TODO', 'ONGOING', 'TESTING', 'COMPLETED'];
+    const assignedTaskColors = ['#FF9F40', '#FF6384', '#36A2EB', '#FFCE56'];
+
+    const assignedTaskChartConfig: ChartConfiguration<'pie'> = {
+      type: 'pie',
+      data: {
+        labels: assignedTaskLabels,
+        datasets: [{
+          data: assignedTaskStatusData,
+          backgroundColor: assignedTaskColors
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          }
+        }
+      }
+    };
+
+    const assignedTaskCanvas = <HTMLCanvasElement>document.getElementById('assignedTaskChart');
+    this.assignedTaskChart = new Chart(assignedTaskCanvas, assignedTaskChartConfig);
+  }
 
   signOut() {
     this.securityService.signOut();
@@ -118,6 +253,7 @@ export class UserDashboardComponent implements OnInit {
     }
   }
 
+
   logout() {
     this.securityService.signOut()
   }
@@ -128,5 +264,6 @@ export class UserDashboardComponent implements OnInit {
   navigateToEdit() {
     this.router.navigate(["/edit-profile"])
   }
+
 
 }

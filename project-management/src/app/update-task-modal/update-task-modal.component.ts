@@ -10,11 +10,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ATask } from '../ATask';
 
 
+
 @Component({
   standalone:true,
   selector: 'app-update-task-modal',
   templateUrl: './update-task-modal.component.html',
-  styleUrls: ['./update-task-modal.component.css'],
+  styleUrl: './update-task-modal.component.css',
   imports:[FormsModule,CommonModule,MatInputModule,MatFormFieldModule,MatSelectModule,MatDialogModule]
 })
 export class UpdateTaskModalComponent {
@@ -41,4 +42,11 @@ export class UpdateTaskModalComponent {
       });
     });
   }
+
+  onStatusChange(status: string): void {
+    if (status === 'COMPLETED') {
+      this.task.progress = 100; // Set progress to 100% if status is completed
+    }
+  }
 }
+

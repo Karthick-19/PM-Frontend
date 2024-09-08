@@ -15,6 +15,8 @@ export class SecurityService {
 
   private url = 'http://localhost:7050';
 
+  userdata!:string
+
   jwt: string = "";
 
   currentUser: UserRegister = new UserRegister(0,"","","","","");
@@ -60,5 +62,7 @@ export class SecurityService {
   getUsersByOrganization(organization: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/organization/${organization}`);
   }
+
+
 
 }

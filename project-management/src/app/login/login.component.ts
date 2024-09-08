@@ -64,6 +64,7 @@ export class LoginComponent {
             localStorage.setItem('uname', data.name); // Store the user ID
             localStorage.setItem('username',data.username)
             localStorage.setItem('uorg',data.organization)
+            localStorage.setItem('utimeline',data.timezone)
             this.router.navigate(['/dashboard']); // Redirect to the dashboard
           },
           error: (error: any) => { console.error(error); }

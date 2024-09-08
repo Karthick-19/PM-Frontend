@@ -1,32 +1,68 @@
+/* Basic modal styles */
+.mat-dialog-container {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.modal-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* Content styling */
 .modal-content {
-    border-radius: 2px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .modal-header {
-    border-bottom: 1px solid #dee2e6; /* Border below the header */
-  }
-  
-  .modal-body {
-    padding: 20px; /* Padding inside the modal */
-  }
-  
-  .form-select {
-    width: 100%; /* Full width for select elements */
-  }
-  
-  .btn-close {
-    background: transparent; /* Transparent background for close button */
-    border: none; /* Remove border */
-  }
-  
-  .btn-primary {
-    background-color: #007bff; /* Primary button color */
-    border-color: #007bff; /* Border color */
-  }
-  
-  .btn-secondary {
-    background-color: #6c757d; /* Secondary button color */
-    border-color: #6c757d; /* Border color */
-  }
-  
+  padding: 1rem;
+  background-color: aliceblue; /* Light gray background */
+}
+
+/* Form field styling */
+.form-field {
+  margin-bottom: 1rem;
+}
+
+/* Button styling */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+/* Raised button styling */
+.mat-raised-button {
+  background-color: #007bff; /* Primary color */
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.mat-raised-button:hover {
+  background-color: #0056b3; /* Darker shade */
+  transform: translateY(-2px);
+}
+
+/* Button hover effect */
+.mat-button {
+  color: #007bff; /* Primary color */
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.mat-button:hover {
+  color: #0056b3; /* Darker shade */
+  background-color: #f8f9fa; /* Light background on hover */
+}
+
+/* Form field hover effect */
+.mat-form-field:hover .mat-form-field-label {
+  color: #007bff; /* Primary color */
+}
+
+.mat-form-field .mat-form-field-ripple {
+  background-color: #007bff; /* Primary color ripple effect */
+}
+

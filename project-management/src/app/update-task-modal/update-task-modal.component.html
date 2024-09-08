@@ -4,7 +4,7 @@
     <div class="form-field">
       <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="task.status" name="status">
+        <mat-select [(ngModel)]="task.status" name="status" (selectionChange)="onStatusChange($event.value)">
           <mat-option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -13,7 +13,7 @@
     <div class="form-field">
       <mat-form-field appearance="fill">
         <mat-label>Progress</mat-label>
-        <mat-select [(ngModel)]="task.progress" name="progress">
+        <mat-select [(ngModel)]="task.progress" name="progress" [disabled]="task.status === 'COMPLETED'">
           <mat-option *ngFor="let progress of progressOptions" [value]="progress">{{ progress }}%</mat-option>
         </mat-select>
       </mat-form-field>

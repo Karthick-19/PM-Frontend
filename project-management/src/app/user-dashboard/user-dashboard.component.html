@@ -9,25 +9,25 @@
             <a href="#" data-bs-toggle="modal" data-bs-target="#calendarModal" style="cursor: pointer;">Calendar</a>
             <a (click)="logout()" style="cursor: pointer;">Logout</a>
         </div>
+
         <!-- Calendar Modal -->
-<div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="calendarModalLabel">Google Calendar</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="calendarModalLabel">Google Calendar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=UTC&bgcolor=%23ffffff&src=a2NydXplMTlAZ21haWwuY29t&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043"
+                                style="border:solid 1px #777" width="100%" height="500" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=UTC&bgcolor=%23ffffff&src=a2NydXplMTlAZ21haWwuY29t&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043"
-              style="border:solid 1px #777" width="100%" height="500" frameborder="0" scrolling="no"></iframe>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
     </nav>
 
     <div class="content-container">
@@ -46,8 +46,22 @@
         <main class="main-content">
             <!-- User Info -->
             <div class="user-info">
-                <h2>Welcome, {{ username }} {{organization}}</h2>
-            </div> 
+                <h5>{{ username }} {{organization}}</h5>
+                <h5> {{timeline}}</h5>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+                <h3>Your Projects Status</h3>
+                <canvas id="taskChart"></canvas> <!-- Chart for "Your Projects" -->
+            </div>
+    
+            <!-- Tasks Assigned to You Chart (Right) -->
+            <div class="col-md-6">
+                <h3>Tasks Assigned </h3>
+                <canvas id="assignedTaskChart"></canvas> <!-- Chart for "Tasks Assigned to You" -->
+            </div>
+        </div>
+              
 
             <!-- Projects and Tasks Sections -->
             <div class="content-sections">
@@ -73,8 +87,7 @@
                 <div class="tasks-container">
                     <h3>Tasks Assigned to You</h3>
                     <div *ngIf="assignedTasks.length > 0; else noAssignedTasks">
-                        <div class="task-box" *ngFor="let task of assignedTasks" >
-                            <!-- <p>{{task.taskId}}</p> -->
+                        <div class="task-box" *ngFor="let task of assignedTasks">
                             <h4>{{ task.taskName }}</h4>
                             <p>{{ task.taskDescription }}</p>
                             <p>Status: <span [ngClass]="{
@@ -87,7 +100,6 @@
                             <p>Deadline: {{ task.deadline | date }}</p>
                             <p>Project Name: {{task.projectName}}</p>
                             <p>Project Description: {{ task.projectDescription }}</p>
-                            <!-- <p>Project Leader: {{ task. }}</p> -->
                             <button (click)="openUpdateTaskModal(task)">Update Task</button>
                         </div>
                     </div>
