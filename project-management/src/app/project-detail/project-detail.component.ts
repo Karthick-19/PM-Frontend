@@ -12,6 +12,8 @@ import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal
 import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TimezoneconverterComponent } from '../timezoneconverter/timezoneconverter.component';
+import { SecurityService } from '../security.service';
+import { MatCardLgImage } from '@angular/material/card';
 
 
 
@@ -28,13 +30,16 @@ export class ProjectDetailComponent implements OnInit {
   projectId!: number;
   tasks: any[] = [];
   taskStatus = TaskStatus; 
+  showPeopleDropdown = false;
+  users: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectServiceService,
     private taskService: TaskService,
     private dialog:MatDialog,
-    private router: Router
+    private router: Router,
+    private securityService:SecurityService
   ) {}
 
   goBack(): void {
@@ -81,6 +86,8 @@ export class ProjectDetailComponent implements OnInit {
         this.project = data;
       });
     });
+    this.loadUsers()
+    console.log(this.users)
   }
 
   getProjectDetails(projectId: number): void {
@@ -119,5 +126,25 @@ export class ProjectDetailComponent implements OnInit {
         width: '500px',
         height: '70vh'
       });
+    }
+
+    togglepeopledropdown(){
+      this.showPeopleDropdown = !this.showPeopleDropdown
+    }
+
+    loadUsers(): void {
+      const organization = localStorage.getItem('uorg'); 
+      const loggedInUsername = localStorage.getItem('username');  // Get logged-in user's username
+      if (organization) {
+        this.securityService.getUsersByOrganization(organization).subscribe({
+          next: (data) => {
+            this.users = data;
+            this.users = data.filter(user => user.username !== loggedInUsername);
+          },
+          error: (error) => {
+            console.error('Error fetching users:', error);
+          }
+        });
+      }
     }
 }

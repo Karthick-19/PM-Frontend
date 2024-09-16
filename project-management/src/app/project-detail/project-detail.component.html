@@ -1,26 +1,45 @@
 <div *ngIf="project">
-  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
+  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">TeamSync</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-          <!-- <a class="nav-link" routerLink="/projects">P</a> -->
-          <a class="nav-link"mat-icon-button (click)="openTimeZoneConverter()">
+          <a class="nav-link" mat-icon-button (click)="openTimeZoneConverter()">
             <mat-icon>access_time</mat-icon>
           </a>
           <a class="nav-link" routerLink="/dashboard">Back</a>
-          <a class="nav-link" (click)="openCreateTaskModal()" style="cursor: pointer;">Add Task</a>
         </div>
       </div>
     </div>
-</nav>
+  </nav>
   <!-- Project Details -->
   <div class="project-details">
+    <!-- Button to toggle the People dropdown -->
+    <div class="buttons-container">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" (click)="togglepeopledropdown()">
+          People
+        </button>
+        <div *ngIf="showPeopleDropdown" class="dropdown-menu show">
+          <ul>
+            <li *ngFor="let user of users">
+              {{ user.username }}
+              {{user.timezone}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button><a class="nav-link" (click)="openCreateTaskModal()" style="cursor: pointer;">Add Task</a></button>
+
+      </div>
     <h2>{{ project.name }}</h2>
     <p>{{ project.description }}</p>
+    <!-- Dropdown for displaying the list of users -->
+
     <div class="kanban-board">
       <div class="kanban-column todo">
         <h3>TODO</h3>
@@ -78,7 +97,7 @@
           <mat-icon class="delete-icon" (click)="deleteTask(task.id)">delete</mat-icon>
         </div>
       </div>
-      
+
     </div>
     <button mat-button color="warn" (click)="onDeleteProject()" class="delete-button">
       Delete Project
