@@ -1,7 +1,7 @@
 <div class="dashboard-container">
     <!-- Top Navbar -->
     <nav class="navbar">
-        <div class="navbar-brand">Dashboard</div>
+        <div class="navbar-brand"></div>
         <div class="navbar-links">
             <a href="#">Home</a>
             <a href="#">Notifications</a>
@@ -30,17 +30,20 @@
         </div>
     </nav>
 
-    <div class="content-container">
-        <!-- Side Navigation -->
-        <nav class="sidenav">
-            <h3>Menu</h3>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a (click)="navigateToEdit()" style="cursor: pointer;">Edit Profile</a></li>
-                <li><a (click)="signOut()" style="cursor: pointer;">Log Out</a></li>
-            </ul>
-        </nav>
+    <div class="content-container" [ngClass]="{'expanded-content': isNavCollapsed}">
+        <!-- Slider Button for Sidenav -->
+    <button class="toggle-btn" (click)="toggleNav()">☰</button>
+
+    <!-- Side Navigation -->
+    <nav class="sidenav" [ngClass]="{'sidenav-collapsed': isNavCollapsed}">
+        <h3>TeamSync</h3>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a (click)="navigateToEdit()" style="cursor: pointer;">Edit Profile</a></li>
+            <li><a (click)="signOut()" style="cursor: pointer;">Log Out</a></li>
+        </ul>
+    </nav>
 
         <!-- Main Content -->
         <main class="main-content">

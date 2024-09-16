@@ -110,6 +110,12 @@ export class UserDashboardComponent implements OnInit {
     
   }
 
+  isNavCollapsed = false;
+
+  toggleNav() {
+    this.isNavCollapsed = !this.isNavCollapsed;
+  }
+
   loadTaskChart(): void {
     // Task status counters
     let todoCount = 0;
